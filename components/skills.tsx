@@ -157,7 +157,7 @@ export default function Skills() {
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
         >
-          {["Python", "PyTorch", "TensorFlow", "scikit-learn", "pandas", "numpy", "Streamlit", "Git"].map(
+          {["Google Colab", "Huggingface", "Kaggle", "Roboflow", "Label Studio", "Git", "Tableau"].map(
             (tool, index) => (
               <motion.div
                 key={index}
