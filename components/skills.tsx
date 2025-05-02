@@ -17,7 +17,6 @@ export default function Skills() {
     { name: "pandas", level: 85 },
     { name: "numpy", level: 85 },
     { name: "matplotlib", level: 80 },
-    { name: "Streamlit", level: 75 },
   ]
 
   const mlSkills = [
@@ -157,7 +156,7 @@ export default function Skills() {
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
         >
-          {["Google Colab", "Huggingface", "Kaggle", "Roboflow", "Label Studio", "Git", "Tableau"].map(
+          {["Google Colab", "Huggingface", "Kaggle", "Roboflow", "Label Studio", "Git", "Streamlit", "Tableau"].map(
             (tool, index) => (
               <motion.div
                 key={index}
