@@ -17,8 +17,9 @@ export default function Projects() {
       tools: ["Python", "PyTorch", "HuggingFace", "Playwright", "Tesseract OCR", "Kaggle"],
       links: {
         github: "https://github.com/azzandwi1/identifying-indonesian-gambling-websites-using-multimodal-late-fusion-technique",
-        demo: "https://huggingface.co/spaces/azzandr/gambling-site-detector",
+        demo: "https://huggingface.co/spaces/azzandr/GamblingDet-ID",
       },
+      category: "Deep Learning & Computer Vision"
     },
     {
       title: "DermoAlly - AI Skin Condition Detection App",
@@ -30,6 +31,31 @@ export default function Projects() {
         github: "https://github.com/Dermoally/Dermoally/",
         demo: "#",
       },
+      category: "Deep Learning & Computer Vision"
+    },
+    {
+      title: "Bank Customer Churn Prediction",
+      description:
+        "Implemented a machine learning model to predict customer churn among bank customers using demographic and transactional features. Conducted data cleaning, exploratory analysis, feature engineering, and applied classification algorithms to identify churn risks.",
+      image: "/images/customer-churn.jpg",
+      tools: ["Python", "Pandas", "Scikit-Learn", "Matplotlib", "Seaborn", "Jupyter Notebook"],
+      links: {
+        github: "https://github.com/azzandwi1/analyzing_and_predicting_customer_churn",
+        demo: "#",
+      },
+      category: "Machine Learning & Predictive Analytics"
+    },
+    {
+      title: "Student Performance Prediction Using Machine Learning",
+      description:
+        "Built a machine learning pipeline to predict student performance using demographic and academic features. Performed EDA, feature selection, model comparison (KNN, Decision Tree, etc.), and analyze factors influencing academic success.",
+      image: "/images/student-performance.jpg",
+      tools: ["Python", "Pandas", "Scikit-Learn", "Matplotlib", "Seaborn", "Jupyter Notebook"],
+      links: {
+        github: "https://github.com/azzandwi1/MATHEMATICAL-TOOLS-FOR-DATA-SCIENCE---Prediksi-Performa-Siswa-dalam-Matematika",
+        demo: "#",
+      },
+      category: "Machine Learning & Predictive Analytics"
     },
     {
       title: "Customer Sales & RFM Analysis",
@@ -41,6 +67,7 @@ export default function Projects() {
         github: "https://github.com/azzandwi1/submission-data-analysis",
         demo: "https://submission-bike-sharing.streamlit.app/",
       },
+      category: "Business Intelligence & Analytics"
     },
     {
       title: "Bike Sharing Dataset Analysis",
@@ -52,7 +79,20 @@ export default function Projects() {
         github: "https://github.com/azzandwi1/data-analysis-project",
         demo: "https://dashboard-dico1.streamlit.app/",
       },
+      category: "Business Intelligence & Analytics"
     },
+    {
+      title: "Sentiment Analysis on News Headlines",
+      description:
+        "Performed sentiment analysis on news headlines using Natural Language Toolkit (NLTK). Built a custom preprocessing pipeline including tokenization and stopword removal, then trained a Naive Bayes Classifier for binary sentiment classification.",
+      image: "/images/news-sentiment.jpg",
+      tools: ["Python", "NLTK", "Naive Bayes", "Matplotlib", "Pandas"],
+      links: {
+        github: "https://github.com/azzandwi1/sentiment-analysis-on-news-headlines",
+        demo: "#"
+      },
+      category: "Natural Language Processing"
+    },    
   ]
 
   const fadeIn = {
@@ -95,52 +135,63 @@ export default function Projects() {
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          className="grid grid-cols-1 gap-12"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
         >
-          {projects.map((project, index) => (
-            <motion.div key={index} variants={fadeIn}>
-              <Card className="h-full overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col">
-                <div className="relative overflow-hidden h-48">
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                  />
-                </div>
-                <CardContent className="p-6 flex-grow">
-                  <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{project.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    {project.tools.map((tool, i) => (
-                      <Badge
-                        key={i}
-                        variant="outline"
-                        className="bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800"
-                      >
-                        {tool}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-                <CardFooter className="p-6 pt-0 flex justify-between">
-                  <Button variant="outline" size="sm" asChild>
-                    <Link href={project.links.github} target="_blank" rel="noopener noreferrer">
-                      <Github className="h-4 w-4 mr-2" />
-                      Code
-                    </Link>
-                  </Button>
-                  <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700" asChild>
-                    <Link href={project.links.demo} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      Demo
-                    </Link>
-                  </Button>
-                </CardFooter>
-              </Card>
+          {Array.from(new Set(projects.map(project => project.category))).map((category) => (
+            <motion.div key={category} variants={fadeIn}>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                {category}
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {projects
+                  .filter(project => project.category === category)
+                  .map((project, index) => (
+                    <motion.div key={index} variants={fadeIn}>
+                      <Card className="h-full overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col">
+                        <div className="relative overflow-hidden h-48">
+                          <img
+                            src={project.image || "/placeholder.svg"}
+                            alt={project.title}
+                            className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                          />
+                        </div>
+                        <CardContent className="p-6 flex-grow">
+                          <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{project.title}</h3>
+                          <p className="text-gray-600 dark:text-gray-400 mb-4">{project.description}</p>
+                          <div className="flex flex-wrap gap-2 mt-4">
+                            {project.tools.map((tool, i) => (
+                              <Badge
+                                key={i}
+                                variant="outline"
+                                className="bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800"
+                              >
+                                {tool}
+                              </Badge>
+                            ))}
+                          </div>
+                        </CardContent>
+                        <CardFooter className="p-6 pt-0 flex justify-between">
+                          <Button variant="outline" size="sm" asChild>
+                            <Link href={project.links.github} target="_blank" rel="noopener noreferrer">
+                              <Github className="h-4 w-4 mr-2" />
+                              Code
+                            </Link>
+                          </Button>
+                          <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700" asChild>
+                            <Link href={project.links.demo} target="_blank" rel="noopener noreferrer">
+                              <ExternalLink className="h-4 w-4 mr-2" />
+                              Demo
+                            </Link>
+                          </Button>
+                        </CardFooter>
+                      </Card>
+                    </motion.div>
+                  ))}
+              </div>
             </motion.div>
           ))}
         </motion.div>
