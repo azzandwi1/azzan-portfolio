@@ -37,7 +37,7 @@ export default function Projects() {
       title: "Bank Customer Churn Prediction",
       description:
         "Implemented a machine learning model to predict customer churn among bank customers using demographic and transactional features. Conducted data cleaning, exploratory analysis, feature engineering, and applied classification algorithms to identify churn risks.",
-      image: "/images/customer-churn.jpg",
+      image: "/images/customer-churn.png",
       tools: ["Python", "Pandas", "Scikit-Learn", "Matplotlib", "Seaborn", "Jupyter Notebook"],
       links: {
         github: "https://github.com/azzandwi1/analyzing_and_predicting_customer_churn",
@@ -49,7 +49,7 @@ export default function Projects() {
       title: "Student Performance Prediction Using Machine Learning",
       description:
         "Built a machine learning pipeline to predict student performance using demographic and academic features. Performed EDA, feature selection, model comparison (KNN, Decision Tree, etc.), and analyze factors influencing academic success.",
-      image: "/images/student-performance.jpg",
+      image: "/images/student-performance.png",
       tools: ["Python", "Pandas", "Scikit-Learn", "Matplotlib", "Seaborn", "Jupyter Notebook"],
       links: {
         github: "https://github.com/azzandwi1/MATHEMATICAL-TOOLS-FOR-DATA-SCIENCE---Prediksi-Performa-Siswa-dalam-Matematika",
@@ -85,7 +85,7 @@ export default function Projects() {
       title: "Sentiment Analysis on News Headlines",
       description:
         "Performed sentiment analysis on news headlines using Natural Language Toolkit (NLTK). Built a custom preprocessing pipeline including tokenization and stopword removal, then trained a Naive Bayes Classifier for binary sentiment classification.",
-      image: "/images/news-sentiment.jpg",
+      image: "/images/news-sentiment.png",
       tools: ["Python", "NLTK", "Naive Bayes", "Matplotlib", "Pandas"],
       links: {
         github: "https://github.com/azzandwi1/sentiment-analysis-on-news-headlines",
