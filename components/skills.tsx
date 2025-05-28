@@ -24,7 +24,7 @@ export default function Skills() {
     { name: "NLP", level: 80 },
     { name: "Deep Learning", level: 85 },
     { name: "Transfer Learning", level: 80 },
-    { name: "LLM (introductory)", level: 70 },
+    { name: "LLM", level: 75 },
     { name: "EDA", level: 85 },
     { name: "Data Preprocessing", level: 85 },
     { name: "Feature Engineering", level: 80 },
