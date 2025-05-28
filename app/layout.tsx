@@ -9,9 +9,9 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Azzan Dwi Riski | AI & Machine Learning Engineer",
+  title: "Azzan Dwi Riski | AI & ML Engineer",
   description:
-    "Portfolio of Azzan Dwi Riski, a AI & Machine Learning Engineer specializing in computer vision, NLP, and data analysis",
+    "Portfolio of Azzan Dwi Riski, a AI & ML Engineer specializing in computer vision, NLP, and data analysis",
     generator: 'v0.dev'
 }
 
