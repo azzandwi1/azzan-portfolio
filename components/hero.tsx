@@ -9,7 +9,7 @@ import Image from "next/image"
 
 export default function Hero() {
   const [typedText, setTypedText] = useState("")
-  const fullText = "Machine Learning Engineer"
+  const fullText = "AI & Machine Learning Engineer"
 
   useEffect(() => {
     let currentIndex = 0

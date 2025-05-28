@@ -13,7 +13,7 @@ export default function Footer() {
               Azzan<span className="text-emerald-500">.</span>
             </Link>
             <p className="mt-2 text-gray-400 max-w-md">
-              Machine Learning Engineer specializing in computer vision, NLP, and data analysis.
+              AI & Machine Learning Engineer specializing in computer vision, NLP, and data analysis.
             </p>
           </div>
 
