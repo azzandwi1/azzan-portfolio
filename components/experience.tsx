@@ -7,11 +7,11 @@ import { Badge } from "@/components/ui/badge"
 export default function Experience() {
   const experiences = [
     {
-      title: "IT Intern",
+      title: "IT Student Intern",
       company: "BPTIKP Jawa Tengah",
       period: "December 2019 – March 2020",
       description: [
-        "Assisted in developing an educational quiz game focused on space exploration using basic web programming.",
+        "Assisted in developing an educational quiz game focused on space exploration using Java.",
         "Supported the creation of a visitor satisfaction survey website for BPTIK.",
         "Contributed to the development of a digital guest book web application to improve visitor tracking.",
       ],

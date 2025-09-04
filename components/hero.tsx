@@ -43,7 +43,7 @@ export default function Hero() {
               <span className="animate-blink">|</span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl">
-              Final-year Informatics Engineering student specializing in machine learning and data analysis. Passionate
+              Fresh graduate specializing in machine learning and data analysis. Passionate
               about building AI solutions that solve real-world problems.
             </p>
 

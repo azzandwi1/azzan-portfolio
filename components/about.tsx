@@ -39,8 +39,8 @@ export default function About() {
           </h2>
           <div className="w-20 h-1 bg-emerald-600 mx-auto mb-8"></div>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Final-year Informatics Engineering student at Universitas Mercu Buana with strong interests in machine
-            learning and data analysis. Experienced in building machine learning and deep learning models using Python,
+            Fresh graduate in Informatics from Universitas Mercu Buana with a strong interest in machine learning 
+            and data analysis. Experienced in building machine learning and deep learning models using Python, 
             scikit-learn, PyTorch, and TensorFlow.
           </p>
         </motion.div>
@@ -126,7 +126,7 @@ export default function About() {
                 </h4>
                 <p className="text-emerald-600 font-medium">Mercu Buana University, Jakarta</p>
               </div>
-              <p className="text-gray-600 dark:text-gray-400 mt-2 md:mt-0">August 2021 – Present</p>
+              <p className="text-gray-600 dark:text-gray-400 mt-2 md:mt-0">August 2021 – August 2025</p>
             </div>
 
             <div className="flex flex-col md:flex-row md:items-center justify-between">
