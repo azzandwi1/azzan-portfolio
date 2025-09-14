@@ -1,13 +1,16 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Github, ExternalLink } from "lucide-react"
 import Link from "next/link"
+import { useState } from "react"
 
 export default function Projects() {
+  const [activeCategory, setActiveCategory] = useState("All")
+  
   const projects = [
     {
       title: "Multimodal Classification for Gambling Web Detection",
@@ -100,12 +103,18 @@ export default function Projects() {
       image: "/images/active-recall-app.png",
       tools: ["Next.js", "FastAPI", "Python", "PostgreSQL", "SQLAlchemy", "Docker", "PaddleOCR", "FAISS", "Gemini API", "RAG"],
       links: {
-        github: "#",
+        github: "https://github.com/azzandwi1/study-with-active-recall-llm-app",
         demo: "#"
       },
       category: "AI Applications & RAG Systems"
     },    
   ]
+
+  const categories = ["All", ...Array.from(new Set(projects.map(project => project.category)))]
+  
+  const filteredProjects = activeCategory === "All" 
+    ? projects 
+    : projects.filter(project => project.category === activeCategory)
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -121,9 +130,23 @@ export default function Projects() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.1,
       },
     },
+  }
+
+  const tabVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: { duration: 0.3 }
+    },
+    exit: { 
+      opacity: 0, 
+      x: 20,
+      transition: { duration: 0.2 }
+    }
   }
 
   return (
@@ -146,67 +169,96 @@ export default function Projects() {
           </p>
         </motion.div>
 
+        {/* Category Tabs */}
         <motion.div
-          className="grid grid-cols-1 gap-12"
+          className="flex flex-wrap justify-center gap-2 mb-12"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
+          variants={fadeIn}
         >
-          {Array.from(new Set(projects.map(project => project.category))).map((category) => (
-            <motion.div key={category} variants={fadeIn}>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                {category}
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {projects
-                  .filter(project => project.category === category)
-                  .map((project, index) => (
-                    <motion.div key={index} variants={fadeIn}>
-                      <Card className="h-full overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col">
-                        <div className="relative overflow-hidden h-48">
-                          <img
-                            src={project.image || "/placeholder.svg"}
-                            alt={project.title}
-                            className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                          />
-                        </div>
-                        <CardContent className="p-6 flex-grow">
-                          <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{project.title}</h3>
-                          <p className="text-gray-600 dark:text-gray-400 mb-4">{project.description}</p>
-                          <div className="flex flex-wrap gap-2 mt-4">
-                            {project.tools.map((tool, i) => (
-                              <Badge
-                                key={i}
-                                variant="outline"
-                                className="bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800"
-                              >
-                                {tool}
-                              </Badge>
-                            ))}
-                          </div>
-                        </CardContent>
-                        <CardFooter className="p-6 pt-0 flex justify-between">
-                          <Button variant="outline" size="sm" asChild>
-                            <Link href={project.links.github} target="_blank" rel="noopener noreferrer">
-                              <Github className="h-4 w-4 mr-2" />
-                              Code
-                            </Link>
-                          </Button>
-                          <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700" asChild>
-                            <Link href={project.links.demo} target="_blank" rel="noopener noreferrer">
-                              <ExternalLink className="h-4 w-4 mr-2" />
-                              Demo
-                            </Link>
-                          </Button>
-                        </CardFooter>
-                      </Card>
-                    </motion.div>
-                  ))}
-              </div>
-            </motion.div>
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setActiveCategory(category)}
+              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                activeCategory === category
+                  ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/25"
+                  : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 hover:text-emerald-600 dark:hover:text-emerald-400"
+              }`}
+            >
+              {category}
+            </button>
           ))}
         </motion.div>
+
+        {/* Projects Grid */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={staggerContainer}
+          >
+            {filteredProjects.map((project, index) => (
+              <motion.div key={`${activeCategory}-${index}`} variants={tabVariants}>
+                <Card className="h-full overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col group">
+                  <div className="relative overflow-hidden h-48">
+                    <img
+                      src={project.image || "/placeholder.svg"}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                  <CardContent className="p-6 flex-grow">
+                    <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tools.slice(0, 4).map((tool, i) => (
+                        <Badge
+                          key={i}
+                          variant="outline"
+                          className="text-xs bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800"
+                        >
+                          {tool}
+                        </Badge>
+                      ))}
+                      {project.tools.length > 4 && (
+                        <Badge
+                          variant="outline"
+                          className="text-xs bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400"
+                        >
+                          +{project.tools.length - 4} more
+                        </Badge>
+                      )}
+                    </div>
+                  </CardContent>
+                  <CardFooter className="p-6 pt-0 flex justify-between">
+                    <Button variant="outline" size="sm" asChild className="flex-1 mr-2">
+                      <Link href={project.links.github} target="_blank" rel="noopener noreferrer">
+                        <Github className="h-4 w-4 mr-2" />
+                        Code
+                      </Link>
+                    </Button>
+                    <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 flex-1" asChild>
+                      <Link href={project.links.demo} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        Demo
+                      </Link>
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   )
