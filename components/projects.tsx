@@ -22,7 +22,7 @@ export default function Projects() {
         github: "https://github.com/azzandwi1/identifying-indonesian-gambling-websites-using-multimodal-late-fusion-technique",
         demo: "https://huggingface.co/spaces/azzandr/GamblingDet-ID",
       },
-      category: "Deep Learning & Computer Vision"
+      category: ["Deep Learning & Computer Vision", "Natural Language Processing"]
     },
     {
       title: "DermoAlly - AI Skin Condition Detection App",
@@ -34,7 +34,7 @@ export default function Projects() {
         github: "https://github.com/Dermoally/Dermoally/",
         demo: "#",
       },
-      category: "Deep Learning & Computer Vision"
+      category: ["Deep Learning & Computer Vision", "AI Applications"]
     },
     {
       title: "Bank Customer Churn Prediction",
@@ -106,15 +106,22 @@ export default function Projects() {
         github: "https://github.com/azzandwi1/study-with-active-recall-llm-app",
         demo: "#"
       },
-      category: "AI Applications & RAG Systems"
+      category: ["AI Applications", "Natural Language Processing"]
     },    
   ]
 
-  const categories = ["All", ...Array.from(new Set(projects.map(project => project.category)))]
+  // Extract all unique categories from projects (handling both string and array)
+  const allCategories = projects.flatMap(project => 
+    Array.isArray(project.category) ? project.category : [project.category]
+  )
+  const categories = ["All", ...Array.from(new Set(allCategories))]
   
   const filteredProjects = activeCategory === "All" 
     ? projects 
-    : projects.filter(project => project.category === activeCategory)
+    : projects.filter(project => {
+        const projectCategories = Array.isArray(project.category) ? project.category : [project.category]
+        return projectCategories.includes(activeCategory)
+      })
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
