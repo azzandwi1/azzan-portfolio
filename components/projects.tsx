@@ -92,6 +92,18 @@ export default function Projects() {
         demo: "#"
       },
       category: "Natural Language Processing"
+    },
+    {
+      title: "Study with Active Recall LLM App",
+      description:
+        "Developed an AI-powered Active Recall learning app using Next.js and FastAPI, integrating multi-format content ingestion (PDF, URL, text) and OCR with PaddleOCR. Implemented FAISS-based Retrieval-Augmented Generation with Gemini API for adaptive flashcard and quiz generation, alongside with AI grading. Deployed with PostgreSQL, SQLAlchemy ORM, and Docker.",
+      image: "/images/active-recall-app.png",
+      tools: ["Next.js", "FastAPI", "Python", "PostgreSQL", "SQLAlchemy", "Docker", "PaddleOCR", "FAISS", "Gemini API", "RAG"],
+      links: {
+        github: "#",
+        demo: "#"
+      },
+      category: "AI Applications & RAG Systems"
     },    
   ]
 
