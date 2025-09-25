@@ -108,6 +108,29 @@ export default function Projects() {
       },
       category: ["AI Applications", "Natural Language Processing"]
     },    
+    {
+      title: "Coffee Sales Dashboard",
+      description:
+        "Interactive Excel dashboard analyzing coffee sales (2019–2022). Showcases advanced Excel features: XLOOKUP, INDEX-MATCH, nested IF logic, formatted Pivot Tables/Charts, Timelines and Slicers for fully filterable insights.",
+      image: "/images/coffeesales.png",
+      tools: [
+        "Excel",
+        "XLOOKUP",
+        "INDEX-MATCH",
+        "IF Logic",
+        "Pivot Tables",
+        "Pivot Charts",
+        "Slicers",
+        "Timeline",
+        "Data Cleaning",
+        "Formatting"
+      ],
+      links: {
+        github: "https://github.com/azzandwi1/coffee-sales-data-analysis",
+        demo: "https://1drv.ms/x/c/f108fa9e0dfd42e4/EYwgdoJIFf1Nguyxc9HBAtQBd6oE2My5SlpGoHknyfcgzQ?e=CDAc9T",
+      },
+      category: "Business Intelligence & Analytics"
+    },
   ]
 
   // Extract all unique categories from projects (handling both string and array)
