@@ -16,7 +16,7 @@ export default function Projects() {
       title: "Multimodal Classification for Gambling Web Detection",
       description:
         "Designed and implemented a multimodal classification system combining Computer Vision and NLP for identifying gambling websites. Applied transfer learning, custom fine-tuning, and fusion strategy to integrate visual and textual information.",
-      image: "/images/gambling.jpg",
+      image: "/images/gambling.png",
       tools: ["Python", "PyTorch", "HuggingFace", "Playwright", "Tesseract OCR", "Kaggle"],
       links: {
         github: "https://github.com/azzandwi1/identifying-indonesian-gambling-websites-using-multimodal-late-fusion-technique",
