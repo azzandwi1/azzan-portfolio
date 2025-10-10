@@ -25,6 +25,26 @@ export default function Projects() {
       category: ["Deep Learning & Computer Vision", "Natural Language Processing"]
     },
     {
+      title: "Superstore Analytics Dashboard",
+      description:
+        "End-to-end Power BI dashboard using the Superstore dataset. Built complete workflow: Power Query transformations, data modeling with a dedicated Date table, DAX measures for core KPIs, time intelligence (PY comparisons), and storytelling-focused visuals.",
+      image: "/images/superstore.png",
+      tools: [
+        "Power BI",
+        "Power Query",
+        "DAX",
+        "Data Modeling",
+        "Time Intelligence",
+        "Visualization",
+        "PowerPoint"
+      ],
+      links: {
+        github: "https://github.com/azzandwi1/Power-BI---Superstore-Analytics-Dashboard",
+        demo: "#"
+      },
+      category: "Business Intelligence & Analytics"
+    },
+    {
       title: "DermoAlly - AI Skin Condition Detection App",
       description:
         "Developed an AI-powered Android app to detect facial skin conditions using a CNN-based image classification model. Built an end-to-end ML pipeline: data collection, preprocessing, augmentation, training, evaluation, and model deployment.",
