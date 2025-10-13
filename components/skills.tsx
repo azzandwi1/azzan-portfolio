@@ -78,7 +78,7 @@ export default function Skills() {
 
             <TabsContent value="technical">
               <motion.div
-                className="grid grid-cols-2 md:grid-cols-5 gap-6"
+                className="grid grid-cols-2 md:grid-cols-4 gap-6"
                 variants={staggerContainer}
                 initial="hidden"
                 animate={activeTab === "technical" ? "visible" : "hidden"}
@@ -147,7 +147,7 @@ export default function Skills() {
             Tools & Technologies
           </h3>
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-5 gap-6"
+            className="grid grid-cols-2 md:grid-cols-4 gap-6"
             variants={staggerContainer}
           >
             {[
