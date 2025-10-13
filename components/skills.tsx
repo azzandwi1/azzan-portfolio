@@ -16,14 +16,7 @@ export default function Skills() {
     { name: "pandas", icon: "pandas" },
     { name: "numpy", icon: "numpy" },
     { name: "matplotlib", icon: "matplotlib" },
-    { name: "Computer Vision", icon: "opencv" },
-    { name: "NLP", icon: "ai" },
     { name: "Deep Learning", icon: "pytorch" },
-    { name: "Transfer Learning", icon: "tensorflow" },
-    { name: "LLM", icon: "ai" },
-    { name: "EDA", icon: "jupyter" },
-    { name: "Data Preprocessing", icon: "pandas" },
-    { name: "Feature Engineering", icon: "sklearn" },
     { name: "API Integration", icon: "fastapi" },
   ]
 
@@ -163,7 +156,6 @@ export default function Skills() {
               { name: "Jupyter Notebook", icon: "jupyter" },
               { name: "Docker", icon: "docker" },
               { name: "Git", icon: "git" },
-              { name: "Streamlit", icon: "streamlit" },
               { name: "Excel", icon: "excel" },
               { name: "Power BI", icon: "powerbi" },
               { name: "Huggingface", icon: "huggingface" },
