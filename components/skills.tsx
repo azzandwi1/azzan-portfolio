@@ -13,9 +13,6 @@ export default function Skills() {
     { name: "TensorFlow", icon: "tensorflow" },
     { name: "scikit-learn", icon: "sklearn" },
     { name: "SQL", icon: "sqlite" },
-    { name: "pandas", icon: "pandas" },
-    { name: "numpy", icon: "numpy" },
-    { name: "matplotlib", icon: "matplotlib" },
     { name: "Deep Learning", icon: "pytorch" },
     { name: "FastAPI", icon: "fastapi" },
     { name: "Flask", icon: "flask" },
@@ -154,15 +151,14 @@ export default function Skills() {
             variants={staggerContainer}
           >
             {[
-              { name: "VS Code", icon: "vscode" },
-              { name: "Jupyter Notebook", icon: "jupyter" },
-              { name: "Docker", icon: "docker" },
-              { name: "GitHub", icon: "github" },
-              { name: "Excel", icon: "excel" },
-              { name: "Power BI", icon: "powerbi" },
-              { name: "Huggingface", icon: "huggingface" },
-              { name: "Roboflow", icon: "roboflow" },
-              { name: "Label Studio", icon: "labelstudio" },
+              { name: "VS Code", icon: "vscode", useLocal: false },
+              { name: "Jupyter Notebook", icon: "jupyter", useLocal: true },
+              { name: "Docker", icon: "docker", useLocal: true },
+              { name: "GitHub", icon: "github", useLocal: false },
+              { name: "Excel", icon: "excel", useLocal: true },
+              { name: "Power BI", icon: "powerbi", useLocal: true },
+              { name: "Huggingface", icon: "huggingface", useLocal: true },
+              { name: "Roboflow", icon: "roboflow", useLocal: true },
             ].map((tool, index) => (
               <motion.div
                 key={index}
@@ -170,7 +166,7 @@ export default function Skills() {
                 className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 flex flex-col items-center justify-center hover:shadow-lg transition-shadow duration-300"
               >
                 <img 
-                  src={`https://skillicons.dev/icons?i=${tool.icon}`}
+                  src={tool.useLocal ? `/logo/${tool.icon}.png` : `https://skillicons.dev/icons?i=${tool.icon}`}
                   alt={tool.name}
                   className="w-12 h-12 mb-3"
                   onError={(e) => {
