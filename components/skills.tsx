@@ -153,7 +153,7 @@ export default function Skills() {
             {[
               { name: "VS Code", icon: "vscode", useLocal: false },
               { name: "Jupyter Notebook", icon: "jupyter", useLocal: true },
-              { name: "Docker", icon: "docker", useLocal: true },
+              { name: "Docker", icon: "docker", useLocal: false },
               { name: "GitHub", icon: "github", useLocal: false },
               { name: "Excel", icon: "excel", useLocal: true },
               { name: "Power BI", icon: "powerbi", useLocal: true },
