@@ -3,40 +3,36 @@
 import { motion } from "framer-motion"
 import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Progress } from "@/components/ui/progress"
 
 export default function Skills() {
   const [activeTab, setActiveTab] = useState("technical")
 
   const technicalSkills = [
-    { name: "Python", level: 90 },
-    { name: "PyTorch", level: 85 },
-    { name: "TensorFlow", level: 85 },
-    { name: "scikit-learn", level: 80 },
-    { name: "SQL", level: 75 },
-    { name: "pandas", level: 85 },
-    { name: "numpy", level: 85 },
-    { name: "matplotlib", level: 80 },
-  ]
-
-  const mlSkills = [
-    { name: "Computer Vision", level: 85 },
-    { name: "NLP", level: 80 },
-    { name: "Deep Learning", level: 85 },
-    { name: "Transfer Learning", level: 80 },
-    { name: "LLM", level: 75 },
-    { name: "EDA", level: 85 },
-    { name: "Data Preprocessing", level: 85 },
-    { name: "Feature Engineering", level: 80 },
-    { name: "API Integration", level: 75 },
+    { name: "Python", icon: "py" },
+    { name: "PyTorch", icon: "pytorch" },
+    { name: "TensorFlow", icon: "tensorflow" },
+    { name: "scikit-learn", icon: "sklearn" },
+    { name: "SQL", icon: "sqlite" },
+    { name: "pandas", icon: "pandas" },
+    { name: "numpy", icon: "numpy" },
+    { name: "matplotlib", icon: "matplotlib" },
+    { name: "Computer Vision", icon: "opencv" },
+    { name: "NLP", icon: "ai" },
+    { name: "Deep Learning", icon: "pytorch" },
+    { name: "Transfer Learning", icon: "tensorflow" },
+    { name: "LLM", icon: "ai" },
+    { name: "EDA", icon: "jupyter" },
+    { name: "Data Preprocessing", icon: "pandas" },
+    { name: "Feature Engineering", icon: "sklearn" },
+    { name: "API Integration", icon: "fastapi" },
   ]
 
   const softSkills = [
-    { name: "Team Collaboration", level: 85 },
-    { name: "Problem Solving", level: 90 },
-    { name: "Technical Mentoring", level: 80 },
-    { name: "Critical Thinking", level: 85 },
-    { name: "Communication", level: 80 },
+    "Team Collaboration",
+    "Problem Solving", 
+    "Technical Mentoring",
+    "Critical Thinking",
+    "Communication",
   ]
 
   const fadeIn = {
@@ -84,45 +80,43 @@ export default function Skills() {
           variants={fadeIn}
         >
           <Tabs defaultValue="technical" className="w-full" onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-3 mb-8">
+            <TabsList className="grid w-full grid-cols-2 mb-8">
               <TabsTrigger value="technical">Technical Skills</TabsTrigger>
-              <TabsTrigger value="ml">ML & AI</TabsTrigger>
               <TabsTrigger value="soft">Soft Skills</TabsTrigger>
             </TabsList>
 
             <TabsContent value="technical">
               <motion.div
-                className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                className="grid grid-cols-2 md:grid-cols-4 gap-6"
                 variants={staggerContainer}
                 initial="hidden"
                 animate={activeTab === "technical" ? "visible" : "hidden"}
               >
                 {technicalSkills.map((skill, index) => (
-                  <motion.div key={index} variants={fadeIn} className="mb-4">
-                    <div className="flex justify-between mb-1">
-                      <span className="text-gray-700 dark:text-gray-300 font-medium">{skill.name}</span>
-                      <span className="text-gray-600 dark:text-gray-400">{skill.level}%</span>
+                  <motion.div 
+                    key={index} 
+                    variants={fadeIn} 
+                    className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 flex flex-col items-center justify-center hover:shadow-lg transition-shadow duration-300"
+                  >
+                    <img 
+                      src={`https://skillicons.dev/icons?i=${skill.icon}`}
+                      alt={skill.name}
+                      className="w-12 h-12 mb-3"
+                      onError={(e) => {
+                        const target = e.currentTarget as HTMLImageElement
+                        target.style.display = 'none'
+                        const nextElement = target.nextElementSibling as HTMLElement
+                        if (nextElement) {
+                          nextElement.style.display = 'block'
+                        }
+                      }}
+                    />
+                    <div className="text-sm font-medium text-gray-900 dark:text-white text-center" style={{display: 'none'}}>
+                      {skill.name}
                     </div>
-                    <Progress value={skill.level} className="h-2" />
-                  </motion.div>
-                ))}
-              </motion.div>
-            </TabsContent>
-
-            <TabsContent value="ml">
-              <motion.div
-                className="grid grid-cols-1 md:grid-cols-2 gap-6"
-                variants={staggerContainer}
-                initial="hidden"
-                animate={activeTab === "ml" ? "visible" : "hidden"}
-              >
-                {mlSkills.map((skill, index) => (
-                  <motion.div key={index} variants={fadeIn} className="mb-4">
-                    <div className="flex justify-between mb-1">
-                      <span className="text-gray-700 dark:text-gray-300 font-medium">{skill.name}</span>
-                      <span className="text-gray-600 dark:text-gray-400">{skill.level}%</span>
-                    </div>
-                    <Progress value={skill.level} className="h-2" />
+                    <span className="text-sm font-medium text-gray-900 dark:text-white text-center mt-2">
+                      {skill.name}
+                    </span>
                   </motion.div>
                 ))}
               </motion.div>
@@ -130,18 +124,20 @@ export default function Skills() {
 
             <TabsContent value="soft">
               <motion.div
-                className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                className="grid grid-cols-2 md:grid-cols-3 gap-6"
                 variants={staggerContainer}
                 initial="hidden"
                 animate={activeTab === "soft" ? "visible" : "hidden"}
               >
                 {softSkills.map((skill, index) => (
-                  <motion.div key={index} variants={fadeIn} className="mb-4">
-                    <div className="flex justify-between mb-1">
-                      <span className="text-gray-700 dark:text-gray-300 font-medium">{skill.name}</span>
-                      <span className="text-gray-600 dark:text-gray-400">{skill.level}%</span>
-                    </div>
-                    <Progress value={skill.level} className="h-2" />
+                  <motion.div 
+                    key={index} 
+                    variants={fadeIn} 
+                    className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300"
+                  >
+                    <span className="text-lg font-medium text-gray-900 dark:text-white text-center">
+                      {skill}
+                    </span>
                   </motion.div>
                 ))}
               </motion.div>
@@ -150,23 +146,57 @@ export default function Skills() {
         </motion.div>
 
         <motion.div
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
+          className="mt-16"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
+          variants={fadeIn}
         >
-          {["Jupyter Notebook", "Huggingface", "Docker", "Roboflow", "Label Studio", "Git", "Streamlit", "Excel", "Power BI"].map(
-            (tool, index) => (
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+            Tools & Technologies
+          </h3>
+          <motion.div
+            className="grid grid-cols-2 md:grid-cols-4 gap-6"
+            variants={staggerContainer}
+          >
+            {[
+              { name: "Jupyter Notebook", icon: "jupyter" },
+              { name: "Docker", icon: "docker" },
+              { name: "Git", icon: "git" },
+              { name: "Streamlit", icon: "streamlit" },
+              { name: "Excel", icon: "excel" },
+              { name: "Power BI", icon: "powerbi" },
+              { name: "Huggingface", icon: "huggingface" },
+              { name: "Roboflow", icon: "roboflow" },
+              { name: "Label Studio", icon: "labelstudio" },
+            ].map((tool, index) => (
               <motion.div
                 key={index}
                 variants={fadeIn}
-                className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 flex items-center justify-center h-24"
+                className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 flex flex-col items-center justify-center hover:shadow-lg transition-shadow duration-300"
               >
-                <span className="text-lg font-medium text-gray-900 dark:text-white">{tool}</span>
+                <img 
+                  src={`https://skillicons.dev/icons?i=${tool.icon}`}
+                  alt={tool.name}
+                  className="w-12 h-12 mb-3"
+                  onError={(e) => {
+                    const target = e.currentTarget as HTMLImageElement
+                    target.style.display = 'none'
+                    const nextElement = target.nextElementSibling as HTMLElement
+                    if (nextElement) {
+                      nextElement.style.display = 'block'
+                    }
+                  }}
+                />
+                <div className="text-sm font-medium text-gray-900 dark:text-white text-center" style={{display: 'none'}}>
+                  {tool.name}
+                </div>
+                <span className="text-sm font-medium text-gray-900 dark:text-white text-center mt-2">
+                  {tool.name}
+                </span>
               </motion.div>
-            ),
-          )}
+            ))}
+          </motion.div>
         </motion.div>
       </div>
     </section>
