@@ -12,8 +12,8 @@ export default function Skills() {
     { name: "PyTorch", icon: "pytorch" },
     { name: "TensorFlow", icon: "tensorflow" },
     { name: "scikit-learn", icon: "sklearn" },
+    { name: "OpenCV", icon: "opencv" },
     { name: "SQL", icon: "sqlite" },
-    { name: "Deep Learning", icon: "pytorch" },
     { name: "FastAPI", icon: "fastapi" },
     { name: "Flask", icon: "flask" },
   ]
