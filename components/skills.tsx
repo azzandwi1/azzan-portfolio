@@ -17,7 +17,8 @@ export default function Skills() {
     { name: "numpy", icon: "numpy" },
     { name: "matplotlib", icon: "matplotlib" },
     { name: "Deep Learning", icon: "pytorch" },
-    { name: "API Integration", icon: "fastapi" },
+    { name: "FastAPI", icon: "fastapi" },
+    { name: "Flask", icon: "flask" },
   ]
 
   const softSkills = [
@@ -153,9 +154,10 @@ export default function Skills() {
             variants={staggerContainer}
           >
             {[
+              { name: "VS Code", icon: "vscode" },
               { name: "Jupyter Notebook", icon: "jupyter" },
               { name: "Docker", icon: "docker" },
-              { name: "Git", icon: "git" },
+              { name: "GitHub", icon: "github" },
               { name: "Excel", icon: "excel" },
               { name: "Power BI", icon: "powerbi" },
               { name: "Huggingface", icon: "huggingface" },
