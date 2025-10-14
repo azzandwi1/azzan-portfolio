@@ -8,14 +8,15 @@ export default function Skills() {
   const [activeTab, setActiveTab] = useState("technical")
 
   const technicalSkills = [
-    { name: "Python", icon: "py" },
-    { name: "PyTorch", icon: "pytorch" },
-    { name: "TensorFlow", icon: "tensorflow" },
-    { name: "scikit-learn", icon: "sklearn" },
-    { name: "OpenCV", icon: "opencv" },
-    { name: "SQL", icon: "sqlite" },
-    { name: "FastAPI", icon: "fastapi" },
-    { name: "Flask", icon: "flask" },
+    "Web Scraping",
+    "Data Annotation",
+    "Data Cleaning & Preprocessing",
+    "Feature Engineering",
+    "Exploratory Data Analysis (EDA)",
+    "Data Visualization & Reporting",
+    "Machine Learning Model Development",
+    "Deep Learning (CNN, NLP)",
+    "Model Evaluation & Deployment",
   ]
 
   const softSkills = [
@@ -78,7 +79,7 @@ export default function Skills() {
 
             <TabsContent value="technical">
               <motion.div
-                className="grid grid-cols-2 md:grid-cols-4 gap-6"
+                className="grid grid-cols-2 md:grid-cols-3 gap-6"
                 variants={staggerContainer}
                 initial="hidden"
                 animate={activeTab === "technical" ? "visible" : "hidden"}
@@ -87,26 +88,10 @@ export default function Skills() {
                   <motion.div 
                     key={index} 
                     variants={fadeIn} 
-                    className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 flex flex-col items-center justify-center hover:shadow-lg transition-shadow duration-300"
+                    className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300"
                   >
-                    <img 
-                      src={`https://skillicons.dev/icons?i=${skill.icon}`}
-                      alt={skill.name}
-                      className="w-12 h-12 mb-3"
-                      onError={(e) => {
-                        const target = e.currentTarget as HTMLImageElement
-                        target.style.display = 'none'
-                        const nextElement = target.nextElementSibling as HTMLElement
-                        if (nextElement) {
-                          nextElement.style.display = 'block'
-                        }
-                      }}
-                    />
-                    <div className="text-sm font-medium text-gray-900 dark:text-white text-center" style={{display: 'none'}}>
-                      {skill.name}
-                    </div>
-                    <span className="text-sm font-medium text-gray-900 dark:text-white text-center mt-2">
-                      {skill.name}
+                    <span className="text-lg font-medium text-gray-900 dark:text-white text-center">
+                      {skill}
                     </span>
                   </motion.div>
                 ))}
@@ -144,20 +129,33 @@ export default function Skills() {
           variants={fadeIn}
         >
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-            Tools & Technologies
+            🧰 Tools & Technologies
           </h3>
           <motion.div
             className="grid grid-cols-2 md:grid-cols-4 gap-6"
             variants={staggerContainer}
           >
             {[
-              { name: "VS Code", icon: "vscode", useLocal: false },
+              // Languages & DB
+              { name: "Python", icon: "python", useLocal: false },
+              { name: "SQL", icon: "sqlite", useLocal: false },
+              // ML/DL Libraries
+              { name: "scikit-learn", icon: "sklearn", useLocal: false },
+              { name: "PyTorch", icon: "pytorch", useLocal: false },
+              { name: "TensorFlow", icon: "tensorflow", useLocal: false },
+              { name: "OpenCV", icon: "opencv", useLocal: false },
+              // Frameworks
+              { name: "FastAPI", icon: "fastapi", useLocal: false },
+              { name: "Flask", icon: "flask", useLocal: false },
+              // BI & Productivity
+              { name: "Power BI", icon: "powerbi", useLocal: true },
+              { name: "Excel", icon: "excel", useLocal: true },
               { name: "Jupyter Notebook", icon: "jupyter", useLocal: true },
+              { name: "VS Code", icon: "vscode", useLocal: false },
+              // DevOps & Platforms
               { name: "Docker", icon: "docker", useLocal: false },
               { name: "GitHub", icon: "github", useLocal: false },
-              { name: "Excel", icon: "excel", useLocal: true },
-              { name: "Power BI", icon: "powerbi", useLocal: true },
-              { name: "Huggingface", icon: "huggingface", useLocal: true },
+              { name: "Hugging Face", icon: "huggingface", useLocal: true },
               { name: "Roboflow", icon: "roboflow", useLocal: true },
             ].map((tool, index) => (
               <motion.div
