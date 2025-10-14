@@ -7,6 +7,15 @@ import { Badge } from "@/components/ui/badge"
 export default function Experience() {
   const experiences = [
     {
+      title: "Project-Based Virtual Intern: Data Scientist",
+      company: "Home Credit Indonesia x Rakamin Academy",
+      period: "September 2025 – October 2025",
+      description: [
+        "Implemented various industry tools and concepts such as Excel, SQL, and Python, with an understanding of Big Data and Data Warehouse applications.",
+        "Completed end-to-end data science projects involving data collection, machine learning model development, and creating visualizations and analytical reports that deliver business insights.",
+      ],
+    },
+    {
       title: "IT Student Intern",
       company: "BPTIKP Jawa Tengah",
       period: "December 2019 – March 2020",
