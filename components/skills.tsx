@@ -28,6 +28,7 @@ export default function Skills() {
     "Technical Mentoring",
     "Critical Thinking",
     "Communication",
+    "Leadership",
   ]
 
   const fadeIn = {
