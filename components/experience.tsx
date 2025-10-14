@@ -28,7 +28,7 @@ export default function Experience() {
     {
       title: "Research and Technology Division",
       company: "Association of Computer Science Students",
-      period: "September 2023 – September 2024",
+      period: "November 2023 – August 2024",
       description: [
         "Mentored new students in web development and basic programming.",
         "Supported learning sessions and encouraged technical growth.",
