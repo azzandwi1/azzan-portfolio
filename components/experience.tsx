@@ -16,16 +16,6 @@ export default function Experience() {
       ],
     },
     {
-      title: "IT Student Intern",
-      company: "BPTIKP Jawa Tengah",
-      period: "December 2019 – March 2020",
-      description: [
-        "Assisted in developing an educational quiz game focused on space exploration using Java.",
-        "Supported the creation of a visitor satisfaction survey website for BPTIK.",
-        "Contributed to the development of a digital guest book web application to improve visitor tracking.",
-      ],
-    },
-    {
       title: "Machine Learning Cohort",
       company: "Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka",
       period: "February – July 2024",
@@ -42,6 +32,16 @@ export default function Experience() {
       description: [
         "Mentored new students in web development and basic programming.",
         "Supported learning sessions and encouraged technical growth.",
+      ],
+    },
+    {
+      title: "IT Student Intern",
+      company: "BPTIKP Jawa Tengah",
+      period: "December 2019 – March 2020",
+      description: [
+        "Assisted in developing an educational quiz game focused on space exploration using Java.",
+        "Supported the creation of a visitor satisfaction survey website for BPTIK.",
+        "Contributed to the development of a digital guest book web application to improve visitor tracking.",
       ],
     },
   ]
