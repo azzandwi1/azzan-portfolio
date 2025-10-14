@@ -13,9 +13,12 @@ export default function Skills() {
     "Data Cleaning & Preprocessing",
     "Feature Engineering",
     "Exploratory Data Analysis (EDA)",
-    "Data Visualization & Reporting",
-    "Machine Learning Model Development",
-    "Deep Learning (CNN, NLP)",
+    "Data Visualization & Storytelling",
+    "ML/DL Model Development",
+    "Computer Vision",
+    "Natural Language Processing",
+    "Large Language Models",
+    "Retrieval-Augmented Generation",
     "Model Evaluation & Deployment",
   ]
 
@@ -143,7 +146,6 @@ export default function Skills() {
               { name: "scikit-learn", icon: "sklearn", useLocal: false },
               { name: "PyTorch", icon: "pytorch", useLocal: false },
               { name: "TensorFlow", icon: "tensorflow", useLocal: false },
-              { name: "OpenCV", icon: "opencv", useLocal: false },
               // Frameworks
               { name: "FastAPI", icon: "fastapi", useLocal: false },
               { name: "Flask", icon: "flask", useLocal: false },
@@ -154,6 +156,7 @@ export default function Skills() {
               { name: "VS Code", icon: "vscode", useLocal: false },
               // DevOps & Platforms
               { name: "Docker", icon: "docker", useLocal: false },
+              { name: "Postman", icon: "postman", useLocal: false },
               { name: "GitHub", icon: "github", useLocal: false },
               { name: "Hugging Face", icon: "huggingface", useLocal: true },
               { name: "Roboflow", icon: "roboflow", useLocal: true },
