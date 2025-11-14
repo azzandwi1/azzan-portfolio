@@ -45,6 +45,28 @@ export default function Projects() {
       category: "Business Intelligence & Analytics"
     },
     {
+      title: "Indonesian Public Sentiment & Topic Dashboard",
+      description:
+        "Power BI DirectQuery dashboard connected to a Supabase PostgreSQL backend that stores Twitter-derived sentiment and topic analysis. Extends the Indonesian Provincial Sentiment Tracker by offering interactive province-level insights, trend breakdowns, and real-time filtering for stakeholders.",
+      image: "/images/indonesia-sentiment.png",
+      tools: [
+        "Power BI",
+        "Supabase PostgreSQL",
+        "DirectQuery",
+        "Twitter",
+        "KPI Card",
+        "Map",
+        "Donut",
+        "Bar Chart",
+        "Line Chart"
+      ],
+      links: {
+        github: "https://github.com/azzandwi1/Power-BI---Indonesia-State-Sentiment",
+        demo: "#"
+      },
+      category: "Business Intelligence & Analytics"
+    },
+    {
       title: "DermoAlly - AI Skin Condition Detection App",
       description:
         "Developed an AI-powered Android app to detect facial skin conditions using a CNN-based image classification model. Built an end-to-end ML pipeline: data collection, preprocessing, augmentation, training, evaluation, and model deployment.",
