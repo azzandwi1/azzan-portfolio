@@ -29,144 +29,346 @@ const QUICK_PROMPTS = [
   "📞 Bagaimana cara menghubungi Azzan?",
 ]
 
-function getBotReply(input: string): { text: string; links?: { label: string; href: string }[] } {
-  const query = input.toLowerCase()
+function getBotReply(rawInput: string): { text: string; links?: { label: string; href: string }[] } {
+  const query = rawInput.trim().toLowerCase()
 
-  // 1. SAP Express / Work experience / Promosi
-  if (
-    query.includes("sap express") ||
-    query.includes("sap") ||
-    query.includes("pengalaman") ||
-    query.includes("kerja") ||
-    query.includes("coordinator") ||
-    query.includes("qse") ||
-    query.includes("peran") ||
-    query.includes("jabatan")
-  ) {
-    return {
-      text: "💼 **Pengalaman Utama di PT Satria Antaran Prima Tbk (SAP Express):**\n\n" +
-        "Azzan menjabat sebagai **QSE Coordinator & Data Analyst** (dipromosikan dari Data Analyst pada Agustus 2024):\n\n" +
-        "• **Simulasi UMK 2026 Nasional:** Memodelkan kompensasi kurir di 500+ kota/kabupaten se-Indonesia untuk menyambut regulasi upah baru secara presisi dan *cost-effective*.\n" +
-        "• **Otomatisasi Computer Vision POD:** Mengembangkan model MobileNetV3 untuk memvalidasi foto serah terima paket (*Proof of Delivery*) otomatis, memangkas review manual ~65%.\n" +
-        "• **Dashboard Eksekutif NOS:** Mengembangkan dashboard Power BI yang memantau SLA dan performa 200+ cabang untuk jajaran Direksi dan General Manager.\n" +
-        "• **Otomatisasi ETL:** Memangkas waktu rekonsiliasi data operasional dari 4 jam menjadi 15 menit menggunakan SQL & Python.",
-      links: [
-        { label: "Lihat Timeline Pengalaman", href: "#experience" },
-        { label: "Baca Rekomendasi Atasan", href: "#recommendation" },
-      ],
-    }
+  // Clean tokens (strip common punctuation, normalize whitespace)
+  const cleanText = query.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, " ")
+  const words = cleanText.split(/\s+/).filter(Boolean)
+
+  const hasWord = (...targets: string[]) => {
+    return targets.some((target) => {
+      if (target.includes(" ")) {
+        return cleanText.includes(target)
+      }
+      return words.includes(target)
+    })
   }
 
-  // 2. Proyek / Computer Vision / AI / ML
-  if (
-    query.includes("proyek") ||
-    query.includes("project") ||
-    query.includes("ai") ||
-    query.includes("computer vision") ||
-    query.includes("machine learning") ||
-    query.includes("model") ||
-    query.includes("mobilenet") ||
-    query.includes("vision")
-  ) {
-    return {
-      text: "🤖 **Portofolio Proyek Unggulan Azzan:**\n\n" +
-        "1. **Logistics POD Image Verification (AI/CV):** Model MobileNetV3 edge-ready untuk memvalidasi foto bukti pengiriman paket logistik dengan akurasi 92.4%.\n" +
-        "2. **Superstore Sales Analytics (Power BI):** Dashboard interaktif end-to-end menganalisis profitabilitas, pengembalian barang, dan peramalan tren penjualan retail.\n" +
-        "3. **Active Recall Learning AI (LLM / RAG):** Platform edukasi berbasis Retrieval-Augmented Generation untuk latihan soal adaptif dan retensi memori aktif.\n" +
-        "4. **Credit Risk Scoring (Home Credit):** Model prediksi risiko kredit (LightGBM/XGBoost, AUC 0.82) pada 300K+ data nasabah dengan SHAP & SMOTE.",
-      links: [
-        { label: "Buka Galeri Proyek", href: "#projects" },
-        { label: "Lihat GitHub Azzan", href: "https://github.com/azzandwi1" },
-      ],
-    }
-  }
+  const matchPattern = (pattern: RegExp) => pattern.test(cleanText)
 
-  // 3. Keahlian / Tech stack / Tools
+  // 1. CAPABILITIES & META QUESTIONS ("apakah kamu bisa menjawab pertanyaan lain?", "kamu bisa apa?", "siapa kamu?")
   if (
-    query.includes("skill") ||
-    query.includes("keahlian") ||
-    query.includes("kemampuan") ||
-    query.includes("tools") ||
-    query.includes("stack") ||
-    query.includes("python") ||
-    query.includes("sql") ||
-    query.includes("power bi")
+    hasWord(
+      "pertanyaan lain",
+      "pertanyaan lainnya",
+      "tanya lain",
+      "tanya lainnya",
+      "bisa apa",
+      "bisa jawab apa",
+      "apa saja",
+      "kamu bisa apa",
+      "siapa kamu",
+      "siapakah kamu",
+      "kemampuan kamu",
+      "fitur kamu",
+      "apa fungsi kamu",
+      "bisa bantu apa"
+    ) ||
+    matchPattern(/\b(bisa|dapat)\b.*\b(menjawab|jawab|bantu)\b.*\b(lain|lainnya|apa|semua)\b/) ||
+    matchPattern(/\b(kamu|anda|bot)\b.*\b(bisa|dapat)\b.*\b(apa|ngapain)\b/)
   ) {
     return {
-      text: "📊 **Keahlian Teknis Azzan Dwi Riski:**\n\n" +
-        "• **Core Languages & Analytics:** Python (Pandas, NumPy, Scikit-learn, OpenCV), SQL (PostgreSQL, MySQL), DAX, R, Excel Lanjut.\n" +
-        "• **Business Intelligence:** Power BI (Data Modeling, DAX, Power Query), Tableau, Looker Studio, KPI Executive Reporting.\n" +
-        "• **Applied AI & ML:** Computer Vision (MobileNet, YOLO, CNN), Deep Learning (PyTorch, TensorFlow), NLP/LLM RAG.\n" +
-        "• **Data Engineering & Cloud:** Automated ETL Pipelines, Google Cloud Platform (GCP Cloud Run), Docker, Git, RESTful APIs.",
-      links: [{ label: "Jelajahi Pilar Keterampilan", href: "#skills" }],
-    }
-  }
-
-  // 4. Prestasi / Beasiswa / Pendidikan
-  if (
-    query.includes("prestasi") ||
-    query.includes("beasiswa") ||
-    query.includes("osc") ||
-    query.includes("hackathon") ||
-    query.includes("pendidikan") ||
-    query.includes("kuliah") ||
-    query.includes("ipk") ||
-    query.includes("mercu buana") ||
-    query.includes("juara")
-  ) {
-    return {
-      text: "🏆 **Pendidikan & Prestasi Akademik/Kompetisi:**\n\n" +
-        "• **S1 Teknik Informatika — Universitas Mercu Buana:** IPK **3.87 / 4.00** (*Magna Cum Laude*). Riset skripsi pada Computer Vision & Deep Learning.\n" +
-        "• **Penerima Beasiswa Penuh OSC Medcom:** Berhasil lolos beasiswa penuh 100% dari 50.000+ pendaftar nasional.\n" +
-        "• **Juara 2 Hackathon Nasional Komdigi x DQLab 2024:** Solusi inovasi *AI for Logistics* tingkat nasional.\n" +
-        "• **Bangkit Academy Graduate with Distinction:** Top 1.5% dari 67.000+ pendaftar Google, GoTo, & Traveloka.",
+      text: "Tentu saja! Saya bisa menjawab berbagai pertanyaan tentang profil dan karya **Azzan Dwi Riski**. 😊\n\n" +
+        "Berikut beberapa topik yang bisa Anda tanyakan:\n" +
+        "1. 💼 **Pengalaman di SAP Express:** Tugas harian, pemodelan upah kurir UMK 2026 di 500+ kota, model Computer Vision POD, atau dashboard 200+ cabang.\n" +
+        "2. 🤖 **Proyek Data & AI:** Detail proyek MobileNetV3 POD, dashboard Power BI Superstore, sistem Active Recall LLM/RAG, dan Credit Scoring.\n" +
+        "3. 🛠️ **Keahlian & Tools:** Bahasa pemrograman (Python, SQL, DAX), library machine learning, dan arsitektur data.\n" +
+        "4. 🎓 **Pendidikan & Prestasi:** Nilai IPK (3.87), Beasiswa Penuh OSC Medcom, riset skripsi, dan Juara 2 Hackathon Komdigi.\n" +
+        "5. 📞 **Kontak & Rekrutmen:** Cara menghubungi Azzan via WhatsApp atau Email untuk wawancara dan peluang karir.\n\n" +
+        "Silakan ketik pertanyaan Anda secara bebas!",
       links: [
-        { label: "Lihat Sertifikat & Penghargaan", href: "#certifications" },
-        { label: "Tentang Azzan", href: "#about" },
-      ],
-    }
-  }
-
-  // 5. Kontak / Hiring / Rekrutmen / WhatsApp / Email
-  if (
-    query.includes("kontak") ||
-    query.includes("contact") ||
-    query.includes("email") ||
-    query.includes("wa") ||
-    query.includes("whatsapp") ||
-    query.includes("hire") ||
-    query.includes("rekrut") ||
-    query.includes("nomor") ||
-    query.includes("cv") ||
-    query.includes("resume")
-  ) {
-    return {
-      text: "📞 **Hubungi Azzan Dwi Riski:**\n\n" +
-        "Azzan saat ini terbuka untuk peluang kolaborasi dan karir strategis di bidang **Data Analytics, Business Intelligence, dan Applied AI**:\n\n" +
-        "• **Email:** azzandwiriski145@gmail.com\n" +
-        "• **WhatsApp:** +62 858-6607-3348\n" +
-        "• **LinkedIn:** linkedin.com/in/azzandr\n" +
-        "• **Lokasi:** Jakarta Barat & Tangerang, Indonesia (Tersedia On-site / Hybrid / Remote).",
-      links: [
-        { label: "Kirim Email Sekarang", href: "mailto:azzandwiriski145@gmail.com?subject=Inquiry%20via%20Portfolio" },
-        { label: "Chat via WhatsApp", href: "https://wa.me/6285866073348?text=Halo%20Azzan%2C%20saya%20melihat%20portofolio%20Anda" },
+        { label: "Lihat Tentang Azzan", href: "#about" },
         { label: "Buka Form Kontak", href: "#contact" },
       ],
     }
   }
 
-  // 6. Default / Fallback response
+  // 2. GREETINGS (Halo, Hai, Selamat Pagi, dll)
+  if (
+    hasWord(
+      "halo",
+      "hai",
+      "hello",
+      "hi",
+      "hey",
+      "selamat pagi",
+      "selamat siang",
+      "selamat sore",
+      "selamat malam",
+      "assalamualaikum",
+      "pagi",
+      "siang",
+      "sore",
+      "malam",
+      "apa kabar"
+    )
+  ) {
+    return {
+      text: "Halo! Selamat datang di portofolio Azzan Dwi Riski. 👋\n\n" +
+        "Saya adalah asisten virtual yang siap membantu Anda mengenal lebih jauh tentang perjalanan karir Azzan sebagai **QSE Coordinator & Data Analyst** di **SAP Express**, riset **Computer Vision & AI**, hingga portofolio proyeknya.\n\n" +
+        "Ada yang ingin Anda ketahui lebih lanjut?",
+      links: [
+        { label: "Jelajahi Pengalaman", href: "#experience" },
+        { label: "Lihat Proyek", href: "#projects" },
+      ],
+    }
+  }
+
+  // 3. APPRECIATION / THANKS ("makasih", "terima kasih", "keren", "good", "oke")
+  if (hasWord("terima kasih", "makasih", "thanks", "thank you", "keren", "mantap", "oke", "ok", "siap", "bagus")) {
+    return {
+      text: "Sama-sama! Senang bisa membantu Anda. 🙏\n\nJika ada hal lain yang ingin Anda ketahui atau tertarik untuk berdiskusi/merekrut Azzan, jangan ragu untuk bertanya lagi atau langsung menghubungi kontak resminya.",
+      links: [
+        { label: "Hubungi via WhatsApp", href: "https://wa.me/6285866073348?text=Halo%20Azzan%2C%20saya%20melihat%20portofolio%20Anda" },
+        { label: "Kirim Email", href: "mailto:azzandwiriski145@gmail.com" },
+      ],
+    }
+  }
+
+  // 4. SCORING SYSTEM FOR SPECIFIC DOMAIN QUERIES
+  let scoreSAP = 0
+  let scoreProjects = 0
+  let scoreSkills = 0
+  let scoreEdu = 0
+  let scoreContact = 0
+
+  // Check SAP Express keywords
+  const sapKeywords = [
+    "sap",
+    "express",
+    "qse",
+    "koordinator",
+    "coordinator",
+    "umk",
+    "upah",
+    "gaji",
+    "kurir",
+    "kompensasi",
+    "nos",
+    "sla",
+    "logistik",
+    "ekspedisi",
+    "kerja",
+    "kantor",
+    "perusahaan",
+    "tugas",
+    "pekerjaan",
+    "pengalaman",
+  ]
+  sapKeywords.forEach((k) => {
+    if (hasWord(k)) scoreSAP += 2
+  })
+  if (cleanText.includes("sap express")) scoreSAP += 6
+  if (cleanText.includes("pengalaman kerja")) scoreSAP += 4
+
+  // Check Projects & AI keywords (strict standalone words, NOT substrings)
+  const projKeywords = [
+    "proyek",
+    "project",
+    "projects",
+    "portofolio",
+    "portfolio",
+    "karya",
+    "mobilenet",
+    "mobilenetv3",
+    "superstore",
+    "credit scoring",
+    "active recall",
+    "rag",
+    "yolo",
+    "aplikasi",
+  ]
+  projKeywords.forEach((k) => {
+    if (hasWord(k)) scoreProjects += 2
+  })
+  if (hasWord("ai") || cleanText.includes("artificial intelligence")) scoreProjects += 3
+  if (cleanText.includes("computer vision")) scoreProjects += 5
+  if (cleanText.includes("machine learning")) scoreProjects += 4
+  if (cleanText.includes("deep learning")) scoreProjects += 4
+
+  // Check Skills keywords
+  const skillKeywords = [
+    "skill",
+    "skills",
+    "keahlian",
+    "kemampuan",
+    "tools",
+    "teknologi",
+    "stack",
+    "tech",
+    "python",
+    "sql",
+    "dax",
+    "power bi",
+    "powerbi",
+    "tableau",
+    "looker",
+    "pytorch",
+    "tensorflow",
+    "docker",
+    "gcp",
+    "etl",
+    "excel",
+  ]
+  skillKeywords.forEach((k) => {
+    if (hasWord(k)) scoreSkills += 2
+  })
+  if (cleanText.includes("power bi")) scoreSkills += 4
+  if (cleanText.includes("bahasa pemrograman")) scoreSkills += 4
+
+  // Check Education & Honors keywords
+  const eduKeywords = [
+    "kuliah",
+    "kampus",
+    "pendidikan",
+    "universitas",
+    "mercu",
+    "buana",
+    "umb",
+    "ipk",
+    "gpa",
+    "skripsi",
+    "thesis",
+    "lulus",
+    "sarjana",
+    "beasiswa",
+    "osc",
+    "medcom",
+    "prestasi",
+    "juara",
+    "hackathon",
+    "komdigi",
+    "penghargaan",
+    "sertifikat",
+    "sertifikasi",
+    "lisensi",
+  ]
+  eduKeywords.forEach((k) => {
+    if (hasWord(k)) scoreEdu += 2
+  })
+  if (cleanText.includes("mercu buana")) scoreEdu += 5
+  if (cleanText.includes("beasiswa osc")) scoreEdu += 5
+  if (cleanText.includes("hackathon komdigi")) scoreEdu += 5
+
+  // Check Contact & Hiring keywords
+  const contactKeywords = [
+    "kontak",
+    "contact",
+    "hubungi",
+    "email",
+    "mail",
+    "whatsapp",
+    "wa",
+    "telepon",
+    "phone",
+    "nomor",
+    "hire",
+    "rekrut",
+    "rekrutmen",
+    "interview",
+    "wawancara",
+    "loker",
+    "lowongan",
+    "kolaborasi",
+    "lokasi",
+    "domisili",
+    "cv",
+    "resume",
+  ]
+  contactKeywords.forEach((k) => {
+    if (hasWord(k)) scoreContact += 2
+  })
+  if (cleanText.includes("kirim pesan")) scoreContact += 4
+  if (cleanText.includes("nomor telepon") || cleanText.includes("nomor wa")) scoreContact += 4
+
+  const maxScore = Math.max(scoreSAP, scoreProjects, scoreSkills, scoreEdu, scoreContact)
+
+  if (maxScore > 0) {
+    if (maxScore === scoreSAP) {
+      return {
+        text: "💼 **Peran & Pengalaman Kerja di PT Satria Antaran Prima Tbk (SAP Express):**\n\n" +
+          "Azzan menjabat sebagai **QSE Coordinator & Data Analyst** (dipromosikan dari Data Analyst pada Agustus 2024):\n\n" +
+          "• **Pemodelan Upah UMK 2026 Nasional:** Memimpin simulasi kompensasi kurir di 500+ kota/kabupaten se-Indonesia menyambut proyeksi UMK baru untuk efisiensi biaya operasional.\n" +
+          "• **Otomatisasi Computer Vision POD:** Mengembangkan model MobileNetV3 edge-ready untuk memvalidasi foto bukti serah terima paket (*Proof of Delivery*), memangkas review manual hingga ~65%.\n" +
+          "• **Dashboard Eksekutif NOS:** Mengembangkan dashboard Power BI yang memantau SLA pengiriman dan drop rate di 200+ cabang untuk jajaran Direksi dan General Manager.\n" +
+          "• **Otomatisasi Pipeline ETL:** Memangkas durasi rekonsiliasi data operasional harian dari 4 jam menjadi 15 menit menggunakan SQL dan Python.",
+        links: [
+          { label: "Lihat Timeline Pengalaman", href: "#experience" },
+          { label: "Baca Rekomendasi Head of QSE", href: "#recommendation" },
+        ],
+      }
+    }
+
+    if (maxScore === scoreProjects) {
+      return {
+        text: "🤖 **Portofolio Proyek Unggulan Azzan:**\n\n" +
+          "1. **Logistics POD Image Verification (Computer Vision):** Model MobileNetV3 untuk memvalidasi foto bukti serah terima paket kurir secara otomatis dengan akurasi 92.4%.\n" +
+          "2. **Superstore Sales Analytics (Power BI):** Dashboard interaktif end-to-end menganalisis profitabilitas, tren geografis, dan retur barang retail menggunakan DAX & Power Query.\n" +
+          "3. **Active Recall Learning AI (LLM / RAG):** Platform edukasi adaptif berbasis Retrieval-Augmented Generation untuk latihan soal dan retensi materi.\n" +
+          "4. **Credit Risk Scoring (Home Credit Indonesia):** Model prediksi risiko kredit (LightGBM/XGBoost, AUC 0.82) pada 300K+ data aplikasi nasabah.",
+        links: [
+          { label: "Buka Galeri Proyek", href: "#projects" },
+          { label: "Kunjungi GitHub Azzan", href: "https://github.com/azzandwi1" },
+        ],
+      }
+    }
+
+    if (maxScore === scoreSkills) {
+      return {
+        text: "📊 **Keahlian Teknis & Tools Azzan Dwi Riski:**\n\n" +
+          "• **Bahasa Pemrograman & Data:** Python (Pandas, NumPy, Scikit-learn, OpenCV), SQL (PostgreSQL, MySQL), DAX, R, Excel Lanjut (Power Query, VBA).\n" +
+          "• **Business Intelligence:** Power BI (Data Modeling, DAX Measures, Storytelling Dashboards), Tableau, Looker Studio, Executive KPI Reporting.\n" +
+          "• **Machine Learning & Applied AI:** Computer Vision (MobileNet, YOLO, CNN), Deep Learning (PyTorch, TensorFlow), NLP/LLM RAG.\n" +
+          "• **Data Engineering & Cloud:** Automated ETL Pipelines, Google Cloud Platform (GCP Cloud Run), Docker, Git, RESTful API.",
+        links: [{ label: "Jelajahi Pilar Keterampilan", href: "#skills" }],
+      }
+    }
+
+    if (maxScore === scoreEdu) {
+      return {
+        text: "🎓 **Pendidikan, Beasiswa & Prestasi Resmi:**\n\n" +
+          "• **S1 Teknik Informatika — Universitas Mercu Buana:** IPK **3.87 / 4.00** (*Magna Cum Laude*). Riset skripsi berfokus pada Computer Vision & Deep Learning untuk klasifikasi citra.\n" +
+          "• **Penerima Beasiswa Penuh OSC Medcom:** Berhasil lolos beasiswa penuh 100% dari 50.000+ pendaftar tingkat nasional.\n" +
+          "• **Juara 2 Hackathon Nasional Komdigi x DQLab 2024:** Meraih penghargaan nasional pada kategori solusi *AI for Logistics*.\n" +
+          "• **Bangkit Academy (Google, GoTo, Traveloka):** Lulusan Terbaik (*Distinction Graduate*, Top 1.5% dari 67.000+ pendaftar).",
+        links: [
+          { label: "Lihat Lisensi & Penghargaan", href: "#certifications" },
+          { label: "Tentang Profil Azzan", href: "#about" },
+        ],
+      }
+    }
+
+    if (maxScore === scoreContact) {
+      return {
+        text: "📞 **Informasi Kontak & Ketersediaan Rekrutmen:**\n\n" +
+          "Azzan terbuka untuk posisi **Data Analyst, Operations Specialist, dan Applied AI Practitioner** (tersedia On-site di Jakarta/Tangerang, Hybrid, maupun Remote):\n\n" +
+          "• **WhatsApp:** +62 858-6607-3348 (Respon Cepat)\n" +
+          "• **Email:** azzandwiriski145@gmail.com\n" +
+          "• **LinkedIn:** linkedin.com/in/azzandr\n" +
+          "• **Domisili:** Tangerang & Jakarta Barat, Indonesia.",
+        links: [
+          { label: "Chat WhatsApp Sekarang", href: "https://wa.me/6285866073348?text=Halo%20Azzan%2C%20saya%20melihat%20portofolio%20Anda" },
+          { label: "Kirim Email Langsung", href: "mailto:azzandwiriski145@gmail.com?subject=Inquiry%20via%20Portfolio" },
+          { label: "Buka Form Kontak", href: "#contact" },
+        ],
+      }
+    }
+  }
+
+  // 5. DEFAULT / OUT OF SCOPE / UNRECOGNIZED
   return {
-    text: "Terima kasih atas pertanyaannya! 😊\n\n" +
-      "Saya memiliki informasi lengkap mengenai:\n" +
-      "1. Pengalaman kerja Azzan di **SAP Express** (pemodelan upah 500+ kota, CV POD, dashboard 200+ cabang).\n" +
-      "2. Proyek teknis (**Computer Vision**, **Power BI Superstore**, **LLM RAG**).\n" +
-      "3. Latar belakang akademik (**IPK 3.87**, Beasiswa **OSC Medcom**, Juara 2 **Hackathon Komdigi**).\n" +
-      "4. Kontak resmi dan opsi rekrutmen.\n\n" +
-      "Silakan pilih topik cepat di bawah atau tanyakan hal spesifik lainnya!",
+    text: "Saya adalah asisten virtual portofolio khusus untuk **Azzan Dwi Riski**. 😊\n\n" +
+      "Saya belum menemukan topik yang pas dengan pertanyaan Anda. Anda bisa menanyakan hal seputar:\n" +
+      "• Pengalaman kerja & peran Azzan di **SAP Express**\n" +
+      "• Proyek **Computer Vision**, **Power BI**, atau **AI**\n" +
+      "• **Keahlian teknis** (Python, SQL, Power BI, dll.)\n" +
+      "• Latar belakang pendidikan, beasiswa **OSC**, atau **IPK**\n" +
+      "• **Cara menghubungi / merekrut** Azzan\n\n" +
+      "Silakan coba tanyakan kembali dengan kata kunci di atas!",
     links: [
       { label: "Tentang Azzan", href: "#about" },
-      { label: "Hubungi Azzan", href: "#contact" },
+      { label: "Kirim Pesan ke Azzan", href: "#contact" },
     ],
   }
 }
