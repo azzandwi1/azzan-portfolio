@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Bot, Sparkles, X, Send, RefreshCw, User, MessageSquareCode, ExternalLink, CornerDownLeft } from "lucide-react"
+import { Bot, Sparkles, X, Send, RefreshCw, User, ExternalLink } from "lucide-react"
 
 interface Message {
   id: string
@@ -148,8 +148,9 @@ function getBotReply(input: string): { text: string; links?: { label: string; hr
         "• **LinkedIn:** linkedin.com/in/azzandr\n" +
         "• **Lokasi:** Jakarta Barat & Tangerang, Indonesia (Tersedia On-site / Hybrid / Remote).",
       links: [
-        { label: "Kirim Pesan Langsung", href: "#contact" },
-        { label: "Buka Profil LinkedIn", href: "https://www.linkedin.com/in/azzandr/" },
+        { label: "Kirim Email Sekarang", href: "mailto:azzandwiriski145@gmail.com?subject=Inquiry%20via%20Portfolio" },
+        { label: "Chat via WhatsApp", href: "https://wa.me/6285866073348?text=Halo%20Azzan%2C%20saya%20melihat%20portofolio%20Anda" },
+        { label: "Buka Form Kontak", href: "#contact" },
       ],
     }
   }
@@ -162,7 +163,7 @@ function getBotReply(input: string): { text: string; links?: { label: string; hr
       "2. Proyek teknis (**Computer Vision**, **Power BI Superstore**, **LLM RAG**).\n" +
       "3. Latar belakang akademik (**IPK 3.87**, Beasiswa **OSC Medcom**, Juara 2 **Hackathon Komdigi**).\n" +
       "4. Kontak resmi dan opsi rekrutmen.\n\n" +
-      "Silakan pilih topik di atas atau tanyakan hal spesifik lainnya!",
+      "Silakan pilih topik cepat di bawah atau tanyakan hal spesifik lainnya!",
     links: [
       { label: "Tentang Azzan", href: "#about" },
       { label: "Hubungi Azzan", href: "#contact" },
@@ -171,6 +172,7 @@ function getBotReply(input: string): { text: string; links?: { label: string; hr
 }
 
 export default function AIAssistant() {
+  const [mounted, setMounted] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES)
   const [inputValue, setInputValue] = useState("")
@@ -181,11 +183,16 @@ export default function AIAssistant() {
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
     if (isOpen) {
       setHasUnread(false)
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         inputRef.current?.focus()
-      }, 300)
+      }, 200)
+      return () => clearTimeout(timer)
     }
   }, [isOpen])
 
@@ -208,7 +215,6 @@ export default function AIAssistant() {
     setInputValue("")
     setIsTyping(true)
 
-    // Simulate smart thinking delay (450ms)
     setTimeout(() => {
       const reply = getBotReply(text)
       const botMsg: Message = {
@@ -220,7 +226,7 @@ export default function AIAssistant() {
       }
       setMessages((prev) => [...prev, botMsg])
       setIsTyping(false)
-    }, 450)
+    }, 400)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -234,32 +240,42 @@ export default function AIAssistant() {
     setMessages(INITIAL_MESSAGES)
   }
 
+  if (!mounted) {
+    return null
+  }
+
   return (
     <>
       {/* Floating Toggle Button */}
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-6 right-6 z-[60]">
         <motion.div
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className="relative group"
         >
-          {/* Subtle Ambient Pulse Aura */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 via-cyan-500 to-emerald-500 rounded-full blur-md opacity-70 group-hover:opacity-100 transition duration-500 animate-pulse" />
+          {/* Subtle Ambient Pulse Aura (pointer-events-none to prevent blocking clicks) */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 via-cyan-500 to-emerald-500 rounded-full blur-md opacity-70 group-hover:opacity-100 transition duration-500 animate-pulse pointer-events-none" />
 
           <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="relative flex items-center gap-2.5 px-4 py-3 rounded-full bg-slate-900 border border-teal-500/40 text-slate-100 shadow-xl shadow-teal-950/40 hover:border-teal-400 transition-colors"
+            onClick={() => setIsOpen((prev) => !prev)}
+            className="relative flex items-center gap-2.5 px-4 py-3 rounded-full bg-slate-900 border border-teal-500/50 text-slate-100 shadow-2xl shadow-teal-950/60 hover:border-teal-400 transition-colors cursor-pointer select-none"
             aria-label="Toggle AI Assistant"
           >
             <div className="relative">
-              <Bot className="w-5 h-5 text-teal-400" />
-              <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-              </span>
+              {isOpen ? (
+                <X className="w-5 h-5 text-teal-400" />
+              ) : (
+                <Bot className="w-5 h-5 text-teal-400" />
+              )}
+              {!isOpen && (
+                <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+                </span>
+              )}
             </div>
-            <span className="font-medium text-sm hidden sm:inline tracking-tight">
-              Azzan AI Assistant
+            <span className="font-semibold text-sm hidden sm:inline tracking-tight">
+              {isOpen ? "Tutup AI" : "Azzan AI Assistant"}
             </span>
 
             {hasUnread && !isOpen && (
@@ -271,18 +287,18 @@ export default function AIAssistant() {
         </motion.div>
       </div>
 
-      {/* Chat Window Modal */}
+      {/* Chat Window Modal (Clean positioning: bottom-24, guaranteed visible) */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 30, scale: 0.95 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed bottom-22 right-4 sm:right-6 z-50 w-[92vw] sm:w-[420px] max-h-[80vh] h-[580px] flex flex-col rounded-2xl bg-[#090D16]/95 backdrop-blur-2xl border border-slate-700/80 shadow-2xl shadow-black/80 overflow-hidden"
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="fixed bottom-24 right-4 sm:right-6 z-[70] w-[calc(100vw-2rem)] sm:w-[420px] max-h-[82vh] h-[580px] flex flex-col rounded-2xl bg-[#090D16] border border-teal-500/40 shadow-2xl shadow-black overflow-hidden"
           >
             {/* Modal Header */}
-            <div className="flex items-center justify-between px-4 py-3.5 border-b border-slate-800/80 bg-slate-900/60">
+            <div className="flex items-center justify-between px-4 py-3.5 border-b border-slate-800 bg-slate-900/90">
               <div className="flex items-center gap-3">
                 <div className="relative p-2 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-400">
                   <Bot className="w-5 h-5" />
@@ -320,7 +336,7 @@ export default function AIAssistant() {
             </div>
 
             {/* Messages Scroll Area */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 text-sm scroll-smooth">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 text-sm scroll-smooth bg-slate-950/60">
               {messages.map((msg) => (
                 <div
                   key={msg.id}
@@ -336,14 +352,14 @@ export default function AIAssistant() {
                     className={`max-w-[85%] rounded-2xl px-4 py-3 leading-relaxed ${
                       msg.sender === "user"
                         ? "bg-teal-600 text-slate-50 rounded-br-none shadow-md shadow-teal-950/40"
-                        : "bg-slate-900/90 border border-slate-800 text-slate-200 rounded-bl-none shadow-sm"
+                        : "bg-slate-900 border border-slate-800 text-slate-200 rounded-bl-none shadow-sm"
                     }`}
                   >
                     <div className="whitespace-pre-line text-[13px]">{msg.text}</div>
 
                     {/* Interactive Action Links */}
                     {msg.links && msg.links.length > 0 && (
-                      <div className="mt-3 pt-2.5 border-t border-slate-800/80 flex flex-wrap gap-2">
+                      <div className="mt-3 pt-2.5 border-t border-slate-800 flex flex-wrap gap-2">
                         {msg.links.map((link, i) => (
                           <a
                             key={i}
@@ -386,7 +402,7 @@ export default function AIAssistant() {
                   <div className="w-7 h-7 rounded-lg bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-400">
                     <Sparkles className="w-3.5 h-3.5" />
                   </div>
-                  <div className="bg-slate-900/90 border border-slate-800 rounded-2xl rounded-bl-none px-4 py-2.5 flex items-center gap-1.5">
+                  <div className="bg-slate-900 border border-slate-800 rounded-2xl rounded-bl-none px-4 py-2.5 flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-teal-400 animate-bounce [animation-delay:-0.3s]" />
                     <span className="w-2 h-2 rounded-full bg-teal-400 animate-bounce [animation-delay:-0.15s]" />
                     <span className="w-2 h-2 rounded-full bg-teal-400 animate-bounce" />
@@ -399,14 +415,14 @@ export default function AIAssistant() {
 
             {/* Quick Starter Chips */}
             {messages.length <= 2 && (
-              <div className="px-4 py-2 border-t border-slate-800/60 bg-slate-900/30">
+              <div className="px-4 py-2.5 border-t border-slate-800 bg-slate-900/70">
                 <p className="text-[11px] text-slate-400 mb-2 font-medium">Topik Cepat Populer:</p>
                 <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto">
                   {QUICK_PROMPTS.map((prompt, idx) => (
                     <button
                       key={idx}
                       onClick={() => handleSend(prompt)}
-                      className="text-left text-xs px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-teal-500/20 text-slate-300 hover:text-teal-200 border border-slate-700/60 hover:border-teal-500/30 transition-colors"
+                      className="text-left text-xs px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-teal-500/20 text-slate-300 hover:text-teal-200 border border-slate-700/60 hover:border-teal-500/40 transition-colors cursor-pointer"
                     >
                       {prompt}
                     </button>
@@ -416,7 +432,7 @@ export default function AIAssistant() {
             )}
 
             {/* Input Bar */}
-            <div className="p-3 border-t border-slate-800 bg-slate-900/80">
+            <div className="p-3 border-t border-slate-800 bg-slate-900">
               <div className="relative flex items-center">
                 <input
                   ref={inputRef}
@@ -425,12 +441,12 @@ export default function AIAssistant() {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={handleKeyDown}
                   placeholder="Tanyakan apapun tentang karir & karya Azzan..."
-                  className="w-full pl-3.5 pr-10 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all"
+                  className="w-full pl-3.5 pr-10 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all"
                 />
                 <button
                   onClick={() => handleSend()}
                   disabled={!inputValue.trim()}
-                  className="absolute right-1.5 p-1.5 rounded-lg bg-teal-500 text-slate-950 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-teal-400 transition"
+                  className="absolute right-1.5 p-1.5 rounded-lg bg-teal-500 text-slate-950 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-teal-400 transition cursor-pointer"
                   aria-label="Kirim pertanyaan"
                 >
                   <Send className="w-3.5 h-3.5" />
