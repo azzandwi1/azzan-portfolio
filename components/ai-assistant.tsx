@@ -436,6 +436,76 @@ function getBotReply(rawInput: string): { text: string; links?: { label: string;
   }
 }
 
+function parseInlineFormatting(text: string, isUser: boolean): React.ReactNode[] {
+  const tokens: React.ReactNode[] = []
+  // Matches **bold** or *italic*
+  const regex = /(\*\*.*?\*\*|\*.*?\*)/g
+  let lastIndex = 0
+  let match: RegExpExecArray | null
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      tokens.push(text.slice(lastIndex, match.index))
+    }
+
+    const matchedStr = match[0]
+    if (matchedStr.startsWith("**") && matchedStr.endsWith("**") && matchedStr.length >= 4) {
+      const inner = matchedStr.slice(2, -2)
+      tokens.push(
+        <strong
+          key={`b-${match.index}`}
+          className={`font-semibold ${isUser ? "text-white font-bold" : "text-white"}`}
+        >
+          {inner}
+        </strong>
+      )
+    } else if (matchedStr.startsWith("*") && matchedStr.endsWith("*") && matchedStr.length >= 2) {
+      const inner = matchedStr.slice(1, -1)
+      tokens.push(
+        <em
+          key={`i-${match.index}`}
+          className={`italic ${isUser ? "text-teal-100" : "text-teal-300/90"}`}
+        >
+          {inner}
+        </em>
+      )
+    }
+
+    lastIndex = match.index + matchedStr.length
+  }
+
+  if (lastIndex < text.length) {
+    tokens.push(text.slice(lastIndex))
+  }
+
+  return tokens.length > 0 ? tokens : [text]
+}
+
+function FormattedMessage({ text, isUser }: { text: string; isUser: boolean }) {
+  const lines = text.split("\n")
+
+  return (
+    <div className="space-y-1.5 text-[13px] leading-relaxed">
+      {lines.map((line, idx) => {
+        const trimmed = line.trim()
+        if (!trimmed) {
+          return <div key={idx} className="h-1.5" />
+        }
+
+        const isBullet = trimmed.startsWith("•") || trimmed.startsWith("- ")
+        return (
+          <div
+            key={idx}
+            className={`min-h-[1.25rem] ${isBullet ? "pl-2 -indent-2" : ""}`}
+          >
+            {parseInlineFormatting(line, isUser)}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 export default function AIAssistant() {
   const [mounted, setMounted] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
@@ -620,7 +690,7 @@ export default function AIAssistant() {
                         : "bg-slate-900 border border-slate-800 text-slate-200 rounded-bl-none shadow-sm"
                     }`}
                   >
-                    <div className="whitespace-pre-line text-[13px]">{msg.text}</div>
+                    <FormattedMessage text={msg.text} isUser={msg.sender === "user"} />
 
                     {/* Interactive Action Links */}
                     {msg.links && msg.links.length > 0 && (
