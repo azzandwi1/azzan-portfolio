@@ -1,336 +1,266 @@
 "use client"
 
+import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Github, ExternalLink } from "lucide-react"
+import { Github, ExternalLink, FolderGit2, Sparkles, Layers } from "lucide-react"
 import Link from "next/link"
-import { useState } from "react"
+import Image from "next/image"
 
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState("All")
-  
+
+  const categories = ["All", "Operations & AI", "Computer Vision & NLP", "BI & Analytics"]
+
   const projects = [
     {
-      title: "Multimodal Classification for Gambling Web Detection",
+      title: "Courier App Proof of Delivery (POD) Image Classifier",
       description:
-        "Designed and implemented a multimodal classification system combining Computer Vision and NLP for identifying gambling websites. Applied transfer learning, custom fine-tuning, and fusion strategy to integrate visual and textual information.",
+        "Engineered an automated on-device Computer Vision classifier using MobileNetV3 to validate delivery proof photos directly in courier mobile apps. Classifies submissions into Valid Recipient, Package/Waybill, Background, or Blurry to eliminate false delivery disputes.",
+      image: "/images/dermoally.jpg",
+      tools: ["Python", "TensorFlow", "MobileNetV3", "TFLite", "Computer Vision", "Logistics Ops"],
+      links: {
+        github: "https://github.com/azzandwi1",
+        demo: "https://github.com/azzandwi1",
+      },
+      category: ["Operations & AI", "Computer Vision & NLP"],
+      featured: true,
+      badge: "Enterprise AI",
+    },
+    {
+      title: "Superstore Executive Analytics Dashboard",
+      description:
+        "Comprehensive Power BI BI suite for multi-regional sales, profitability, and customer retention. Built with robust star-schema data modeling, dedicated calendar table, and dynamic DAX measures for YoY time intelligence.",
+      image: "/images/superstore.png",
+      tools: ["Power BI", "DAX", "Power Query", "Data Modeling", "Time Intelligence"],
+      links: {
+        github: "https://github.com/azzandwi1/Power-BI---Superstore-Analytics-Dashboard",
+        demo: "https://github.com/azzandwi1/Power-BI---Superstore-Analytics-Dashboard",
+      },
+      category: ["BI & Analytics"],
+      featured: true,
+      badge: "Power BI Specialization",
+    },
+    {
+      title: "Study with Active Recall LLM & RAG Application",
+      description:
+        "Full-stack AI learning platform featuring document OCR extraction (PaddleOCR), vector embedding retrieval with FAISS, and Gemini API for automated quiz generation and intelligent grading. Containerized with Docker.",
+      image: "/images/active-recall-app.png",
+      tools: ["Next.js", "FastAPI", "Python", "PostgreSQL", "FAISS", "Gemini API", "Docker"],
+      links: {
+        github: "https://github.com/azzandwi1/study-with-active-recall-llm-app",
+        demo: "https://github.com/azzandwi1/study-with-active-recall-llm-app",
+      },
+      category: ["Operations & AI", "Computer Vision & NLP"],
+      featured: true,
+      badge: "Generative AI & RAG",
+    },
+    {
+      title: "Multimodal Indonesian Gambling Web Detection",
+      description:
+        "Multimodal classification system combining Computer Vision (page screenshot features) and NLP (DOM textual tokens) via late-fusion neural architectures to accurately detect Indonesian illegal gambling websites.",
       image: "/images/gambling.png",
-      tools: ["Python", "PyTorch", "HuggingFace", "Playwright", "Tesseract OCR", "Kaggle"],
+      tools: ["PyTorch", "HuggingFace", "Playwright", "Tesseract OCR", "Late-Fusion"],
       links: {
         github: "https://github.com/azzandwi1/identifying-indonesian-gambling-websites-using-multimodal-late-fusion-technique",
         demo: "https://huggingface.co/spaces/azzandr/GamblingDet-ID",
       },
-      category: ["Deep Learning & Computer Vision", "Natural Language Processing"]
+      category: ["Computer Vision & NLP"],
+      featured: false,
+      badge: "Undergraduate Thesis",
     },
     {
-      title: "Superstore Analytics Dashboard",
+      title: "Indonesian Provincial Sentiment & Topic Dashboard",
       description:
-        "End-to-end Power BI dashboard using the Superstore dataset. Built complete workflow: Power Query transformations, data modeling with a dedicated Date table, DAX measures for core KPIs, time intelligence (PY comparisons), and storytelling-focused visuals.",
-      image: "/images/superstore.png",
-      tools: [
-        "Power BI",
-        "Power Query",
-        "DAX",
-        "Data Modeling",
-        "Time Intelligence",
-        "Visualization",
-        "PowerPoint"
-      ],
-      links: {
-        github: "https://github.com/azzandwi1/Power-BI---Superstore-Analytics-Dashboard",
-        demo: "#"
-      },
-      category: "Business Intelligence & Analytics"
-    },
-    {
-      title: "Indonesian Public Sentiment & Topic Dashboard",
-      description:
-        "Power BI DirectQuery dashboard connected to a Supabase PostgreSQL backend that stores Twitter-derived sentiment and topic analysis. Extends the Indonesian Provincial Sentiment Tracker by offering interactive province-level insights, trend breakdowns, and real-time filtering for stakeholders.",
+        "Real-time Power BI DirectQuery dashboard connected to Supabase PostgreSQL, tracking geographical public sentiment trends and topic distributions across all 38 Indonesian provinces.",
       image: "/images/indonesia-sentiment.png",
-      tools: [
-        "Power BI",
-        "Supabase PostgreSQL",
-        "DirectQuery",
-        "Twitter",
-        "KPI Card",
-        "Map",
-        "Donut",
-        "Bar Chart",
-        "Line Chart"
-      ],
+      tools: ["Power BI", "Supabase", "PostgreSQL", "DirectQuery", "Python"],
       links: {
         github: "https://github.com/azzandwi1/Power-BI---Indonesia-State-Sentiment",
-        demo: "#"
+        demo: "https://github.com/azzandwi1/Power-BI---Indonesia-State-Sentiment",
       },
-      category: "Business Intelligence & Analytics"
+      category: ["BI & Analytics"],
+      featured: false,
     },
     {
-      title: "DermoAlly - AI Skin Condition Detection App",
+      title: "DermoAlly - AI Skin Condition Classifier",
       description:
-        "Developed an AI-powered Android app to detect facial skin conditions using a CNN-based image classification model. Built an end-to-end ML pipeline: data collection, preprocessing, augmentation, training, evaluation, and model deployment.",
+        "Android-based CNN application for detecting common facial skin conditions. Trained with TensorFlow and exported to TFLite for edge inference, developed as Bangkit Academy capstone project.",
       image: "/images/dermoally.jpg",
-      tools: ["Python", "TensorFlow", "Flask", "GCP", "Kotlin", "Kaggle", "Git"],
+      tools: ["Python", "TensorFlow", "Flask", "GCP", "Kotlin", "TFLite"],
       links: {
         github: "https://github.com/Dermoally/Dermoally/",
-        demo: "#",
+        demo: "https://github.com/Dermoally/Dermoally/",
       },
-      category: ["Deep Learning & Computer Vision", "AI Applications"]
+      category: ["Computer Vision & NLP"],
+      featured: false,
+      badge: "Bangkit Capstone",
     },
     {
-      title: "Bank Customer Churn Prediction",
+      title: "Bank Customer Churn & Risk Analytics",
       description:
-        "Implemented a machine learning model to predict customer churn among bank customers using demographic and transactional features. Conducted data cleaning, exploratory analysis, feature engineering, and applied classification algorithms to identify churn risks.",
+        "Supervised machine learning pipeline evaluating customer churn probability using behavioral and transactional features. Includes exploratory data analysis, feature engineering, and model validation.",
       image: "/images/customer-churn.png",
-      tools: ["Python", "Pandas", "Scikit-Learn", "Matplotlib", "Seaborn", "Jupyter Notebook"],
+      tools: ["Python", "Scikit-Learn", "Pandas", "Matplotlib", "Seaborn"],
       links: {
         github: "https://github.com/azzandwi1/analyzing_and_predicting_customer_churn",
-        demo: "#",
+        demo: "https://github.com/azzandwi1/analyzing_and_predicting_customer_churn",
       },
-      category: "Machine Learning & Predictive Analytics"
+      category: ["BI & Analytics"],
+      featured: false,
     },
     {
-      title: "Student Performance Prediction Using Machine Learning",
+      title: "Coffee Sales Interactive Excel Modeling",
       description:
-        "Built a machine learning pipeline to predict student performance using demographic and academic features. Performed EDA, feature selection, model comparison (KNN, Decision Tree, etc.), and analyze factors influencing academic success.",
-      image: "/images/student-performance.png",
-      tools: ["Python", "Pandas", "Scikit-Learn", "Matplotlib", "Seaborn", "Jupyter Notebook"],
-      links: {
-        github: "https://github.com/azzandwi1/MATHEMATICAL-TOOLS-FOR-DATA-SCIENCE---Prediksi-Performa-Siswa-dalam-Matematika",
-        demo: "#",
-      },
-      category: "Machine Learning & Predictive Analytics"
-    },
-    {
-      title: "Customer Sales & RFM Analysis",
-      description:
-        "Analyzed customer, order, product, and sales data to answer key business questions. Performed full data wrangling (merging, cleaning, type conversion) using Python. Created EDA visualizations for trends, customer demographics, and product performance.",
-      image: "/images/customer.png",
-      tools: ["Python", "Pandas", "Matplotlib", "Seaborn", "Jupyter Notebook", "Streamlit"],
-      links: {
-        github: "https://github.com/azzandwi1/submission-data-analysis",
-        demo: "https://submission-bike-sharing.streamlit.app/",
-      },
-      category: "Business Intelligence & Analytics"
-    },
-    {
-      title: "Bike Sharing Dataset Analysis",
-      description:
-        "Analyzed the Bike Sharing dataset to uncover patterns and business insights. Answered business questions like seasonal trends, user type distribution, and time-based usage. Built an interactive dashboard using Streamlit to present findings clearly.",
-      image: "/images/bikeshare.png",
-      tools: ["Python", "Pandas", "Matplotlib", "Seaborn",  "Jupyter Notebook", "Streamlit"],
-      links: {
-        github: "https://github.com/azzandwi1/data-analysis-project",
-        demo: "https://dashboard-dico1.streamlit.app/",
-      },
-      category: "Business Intelligence & Analytics"
-    },
-    {
-      title: "Sentiment Analysis on News Headlines",
-      description:
-        "Performed sentiment analysis on news headlines using Natural Language Toolkit (NLTK). Built a custom preprocessing pipeline including tokenization and stopword removal, then trained a Naive Bayes Classifier for binary sentiment classification.",
-      image: "/images/news-sentiment.png",
-      tools: ["Python", "NLTK", "Naive Bayes", "Matplotlib", "Pandas"],
-      links: {
-        github: "https://github.com/azzandwi1/sentiment-analysis-on-news-headlines",
-        demo: "#"
-      },
-      category: "Natural Language Processing"
-    },
-    {
-      title: "Study with Active Recall LLM App",
-      description:
-        "Developed an AI-powered Active Recall learning app using Next.js and FastAPI, integrating multi-format content ingestion (PDF, URL, text) and OCR with PaddleOCR. Implemented FAISS-based Retrieval-Augmented Generation with Gemini API for adaptive flashcard and quiz generation, alongside with AI grading. Deployed with PostgreSQL, SQLAlchemy ORM, and Docker.",
-      image: "/images/active-recall-app.png",
-      tools: ["Next.js", "FastAPI", "Python", "PostgreSQL", "SQLAlchemy", "Docker", "PaddleOCR", "FAISS", "Gemini API", "RAG"],
-      links: {
-        github: "https://github.com/azzandwi1/study-with-active-recall-llm-app",
-        demo: "#"
-      },
-      category: ["AI Applications", "Natural Language Processing"]
-    },    
-    {
-      title: "Coffee Sales Dashboard",
-      description:
-        "Interactive Excel dashboard analyzing coffee sales (2019–2022). Showcases advanced Excel features: XLOOKUP, INDEX-MATCH, nested IF logic, formatted Pivot Tables/Charts, Timelines and Slicers for fully filterable insights.",
+        "High-performance interactive financial sales model in Microsoft Excel utilizing dynamic formulas (XLOOKUP, INDEX-MATCH), pivot tables, multi-parameter slicers, and trend analysis.",
       image: "/images/coffeesales.png",
-      tools: [
-        "Excel",
-        "XLOOKUP",
-        "INDEX-MATCH",
-        "IF Logic",
-        "Pivot Tables",
-        "Pivot Charts",
-        "Slicers",
-        "Timeline",
-        "Data Cleaning",
-        "Formatting"
-      ],
+      tools: ["Microsoft Excel", "XLOOKUP", "Pivot Tables", "Financial Modeling"],
       links: {
-        github: "https://github.com/azzandwi1/coffee-sales-data-analysis",
-        demo: "https://1drv.ms/x/c/f108fa9e0dfd42e4/EYwgdoJIFf1Nguyxc9HBAtQBd6oE2My5SlpGoHknyfcgzQ?e=CDAc9T",
+        github: "https://github.com/azzandwi1",
+        demo: "https://github.com/azzandwi1",
       },
-      category: "Business Intelligence & Analytics"
+      category: ["BI & Analytics"],
+      featured: false,
     },
   ]
 
-  // Extract all unique categories from projects (handling both string and array)
-  const allCategories = projects.flatMap(project => 
-    Array.isArray(project.category) ? project.category : [project.category]
-  )
-  const categories = ["All", ...Array.from(new Set(allCategories))]
-  
-  const filteredProjects = activeCategory === "All" 
-    ? projects 
-    : projects.filter(project => {
-        const projectCategories = Array.isArray(project.category) ? project.category : [project.category]
-        return projectCategories.includes(activeCategory)
-      })
+  const filteredProjects =
+    activeCategory === "All"
+      ? projects
+      : projects.filter((p) => p.category.includes(activeCategory))
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  }
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const tabVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: { 
-      opacity: 1, 
-      x: 0,
-      transition: { duration: 0.3 }
-    },
-    exit: { 
-      opacity: 0, 
-      x: 20,
-      transition: { duration: 0.2 }
-    }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   }
 
   return (
-    <section id="projects" className="py-20">
-      <div className="container mx-auto px-4">
+    <section id="projects" className="py-24 relative overflow-hidden">
+      <div className="container mx-auto px-4 max-w-6xl">
+        {/* Section Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12 space-y-3"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeIn}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            My <span className="text-emerald-600">Projects</span>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs text-emerald-400 font-medium">
+            <FolderGit2 className="h-3.5 w-3.5" />
+            <span>Featured Portfolio</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+            Proof of Work & <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">Deployed Projects</span>
           </h2>
-          <div className="w-20 h-1 bg-emerald-600 mx-auto mb-8"></div>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Here are some of the projects I've worked on, showcasing my skills in machine learning, data analysis, and
-            software development.
+          <p className="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base">
+            Real-world systems spanning enterprise logistics operations, deep learning classification, and executive business intelligence.
           </p>
         </motion.div>
 
-        {/* Category Tabs */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-2 mb-12"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeIn}
-        >
-          {categories.map((category) => (
+        {/* Category Filter Pills */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+          {categories.map((cat) => (
             <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                activeCategory === category
-                  ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/25"
-                  : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 hover:text-emerald-600 dark:hover:text-emerald-400"
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ${
+                activeCategory === cat
+                  ? "bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 shadow-md shadow-emerald-500/20 scale-105"
+                  : "bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800"
               }`}
             >
-              {category}
+              {cat}
             </button>
           ))}
-        </motion.div>
+        </div>
 
         {/* Projects Grid */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeCategory}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            variants={staggerContainer}
-          >
-            {filteredProjects.map((project, index) => (
-              <motion.div key={`${activeCategory}-${index}`} variants={tabVariants}>
-                <Card className="h-full overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col group">
-                  <div className="relative overflow-hidden h-48">
-                    <img
-                      src={project.image || "/placeholder.svg"}
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <AnimatePresence>
+            {filteredProjects.map((project, idx) => (
+              <motion.div
+                key={project.title}
+                layout
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.35, delay: idx * 0.05 }}
+              >
+                <Card className="h-full bg-slate-900/80 border-slate-800/80 hover:border-emerald-500/40 rounded-2xl overflow-hidden backdrop-blur-xl shadow-xl hover:shadow-2xl hover:shadow-emerald-950/20 transition-all duration-300 flex flex-col group">
+                  {/* Image with zoom effect */}
+                  <div className="relative aspect-video w-full overflow-hidden bg-slate-950">
+                    <Image
+                      src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+
+                    {project.badge && (
+                      <span className="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-900/90 text-emerald-300 border border-emerald-500/30 backdrop-blur-md">
+                        {project.badge}
+                      </span>
+                    )}
                   </div>
-                  <CardContent className="p-6 flex-grow">
-                    <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tools.slice(0, 4).map((tool, i) => (
-                        <Badge
-                          key={i}
-                          variant="outline"
-                          className="text-xs bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800"
-                        >
-                          {tool}
-                        </Badge>
-                      ))}
-                      {project.tools.length > 4 && (
-                        <Badge
-                          variant="outline"
-                          className="text-xs bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400"
-                        >
-                          +{project.tools.length - 4} more
-                        </Badge>
-                      )}
+
+                  {/* Content */}
+                  <CardContent className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                    <div className="space-y-2">
+                      <h3 className="text-base font-bold text-white group-hover:text-emerald-300 transition-colors line-clamp-2">
+                        {project.title}
+                      </h3>
+                      <p className="text-xs text-slate-400 line-clamp-3 leading-relaxed">
+                        {project.description}
+                      </p>
+                    </div>
+
+                    <div className="space-y-4 pt-2 border-t border-slate-800/80">
+                      {/* Tech Stack Pills */}
+                      <div className="flex flex-wrap gap-1">
+                        {project.tools.slice(0, 4).map((tool) => (
+                          <span
+                            key={tool}
+                            className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-medium"
+                          >
+                            {tool}
+                          </span>
+                        ))}
+                        {project.tools.length > 4 && (
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">
+                            +{project.tools.length - 4}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Links */}
+                      <div className="flex items-center gap-2 pt-1">
+                        {project.links.github && (
+                          <Button asChild variant="outline" size="sm" className="h-7 text-xs border-slate-700 bg-slate-800/50 hover:bg-slate-800 text-slate-200">
+                            <Link href={project.links.github} target="_blank" rel="noopener noreferrer">
+                              <Github className="h-3.5 w-3.5 mr-1" />
+                              Code
+                            </Link>
+                          </Button>
+                        )}
+                        {project.links.demo && project.links.demo !== "#" && (
+                          <Button asChild size="sm" className="h-7 text-xs bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold">
+                            <Link href={project.links.demo} target="_blank" rel="noopener noreferrer">
+                              <ExternalLink className="h-3.5 w-3.5 mr-1" />
+                              Live Preview
+                            </Link>
+                          </Button>
+                        )}
+                      </div>
                     </div>
                   </CardContent>
-                  <CardFooter className="p-6 pt-0 flex justify-between">
-                    <Button variant="outline" size="sm" asChild className="flex-1 mr-2">
-                      <Link href={project.links.github} target="_blank" rel="noopener noreferrer">
-                        <Github className="h-4 w-4 mr-2" />
-                        Code
-                      </Link>
-                    </Button>
-                    <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 flex-1" asChild>
-                      <Link href={project.links.demo} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        Demo
-                      </Link>
-                    </Button>
-                  </CardFooter>
                 </Card>
               </motion.div>
             ))}
-          </motion.div>
-        </AnimatePresence>
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   )

@@ -1,132 +1,204 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Card, CardContent } from "@/components/ui/card"
+import { Briefcase, Calendar, MapPin, TrendingUp, CheckCircle, ArrowRight, Building2, Sparkles } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
 export default function Experience() {
   const experiences = [
     {
-      title: "Project-Based Virtual Intern: Data Scientist",
+      company: "PT Satria Antaran Prima Tbk. (\"SAP Express\")",
+      companyType: "Public Logistics & Express Delivery Enterprise",
+      period: "Nov 2025 – Present · 1 Year",
+      location: "Jakarta, Indonesia · On-site",
+      isCurrent: true,
+      roles: [
+        {
+          title: "QSE Coordinator & Data Analyst",
+          period: "May 2026 – Present · 6 mos",
+          isPromotion: true,
+          description: [
+            "Coordinated and monitored national operational quality and performance standards across hundreds of Hubs/Sub-Hubs and thousands of couriers across Indonesia.",
+            "Architected nationwide courier compensation and incentive models aligned with UMK 2026 across 500+ cities/regencies, integrating fuel allowances (BBM), volume tiers (Kg Delivered), and Logistic Difficulty Index (LDI) to ensure operational financial sustainability.",
+            "Engineered an automated Computer Vision model (MobileNetV3, TensorFlow, TFLite) for mobile Proof of Delivery (POD) photo verification to filter invalid/fraudulent entries in real-time.",
+            "Formulated QSE operational policies and audit guidelines (Internal Memo) for POD Delivered/Undelivered compliance between branch leaders and central operations.",
+          ],
+          tags: ["Operations Analytics", "Power BI", "Incentive Modeling", "MobileNetV3", "Google Apps Script", "QSE Leadership"],
+        },
+        {
+          title: "QSE Data Analyst",
+          period: "Nov 2025 – May 2026 · 7 mos",
+          isPromotion: false,
+          description: [
+            "Built executive KPI tracking dashboards (NOS GM/RM Visibility, SULTIM) to monitor national SLA, On-Time Performance (OTP), and failure rate metrics for C-level and regional executives.",
+            "Automated multi-million row operational data transformation pipelines using Power Query (M Code), DAX Studio, and Excel Data Models, slashing weekly reporting turnaround by over 50%.",
+            "Executed deep-dive root-cause analyses on thousands of customer complaint tickets (damage, lost, delayed delivery) for VIP Business Solution clients.",
+          ],
+          tags: ["Power Query", "DAX Studio", "SQL", "KPI Dashboards", "SLA & OTP Monitoring", "Root Cause Analysis"],
+        },
+      ],
+    },
+    {
       company: "Home Credit Indonesia x Rakamin Academy",
-      period: "September 2025 – October 2025",
-      description: [
-        "Implemented various industry tools and concepts such as Excel, SQL, and Python, with an understanding of Big Data and Data Warehouse applications.",
-        "Completed end-to-end data science projects involving data collection, machine learning model development, and creating visualizations and analytical reports that deliver business insights.",
+      companyType: "Consumer Finance & FinTech",
+      period: "Oct 2025 – Nov 2025 · 2 mos",
+      location: "Jakarta, Indonesia · Hybrid",
+      isCurrent: false,
+      roles: [
+        {
+          title: "Project-Based Virtual Intern: Data Scientist",
+          period: "Oct 2025 – Nov 2025",
+          isPromotion: false,
+          description: [
+            "Executed end-to-end data science workflows on financial transaction datasets, including data extraction (SQL), EDA, feature engineering, and predictive modeling for customer risk/churn.",
+            "Constructed analytics reports and interactive dashboards demonstrating customer segmentation and credit risk behavior to support business stakeholders.",
+          ],
+          tags: ["Python", "SQL", "Predictive Modeling", "Risk Analytics", "Big Data Concepts"],
+        },
       ],
     },
     {
-      title: "Machine Learning Cohort",
       company: "Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka",
-      period: "February – July 2024",
-      description: [
-        "Completed intensive training on Python, data analysis, machine learning, computer vision, and NLP through Coursera and Dicoding platforms.",
-        "Gained practical experience in TensorFlow deployment and ML project management with mentoring from industry experts.",
-        "Developed essential soft skills including critical thinking, problem solving, and professional communication in a multidisciplinary tech environment.",
-      ],
-    },
-    {
-      title: "Research and Technology Division",
-      company: "Association of Computer Science Students",
-      period: "November 2023 – August 2024",
-      description: [
-        "Mentored new students in web development and basic programming.",
-        "Supported learning sessions and encouraged technical growth.",
-      ],
-    },
-    {
-      title: "IT Student Intern",
-      company: "BPTIKP Jawa Tengah",
-      period: "December 2019 – March 2020",
-      description: [
-        "Assisted in developing an educational quiz game focused on space exploration using Java.",
-        "Supported the creation of a visitor satisfaction survey website for BPTIK.",
-        "Contributed to the development of a digital guest book web application to improve visitor tracking.",
+      companyType: "Tech Consortium Internship",
+      period: "Feb 2024 – Jun 2024 · 5 mos",
+      location: "Remote",
+      isCurrent: false,
+      roles: [
+        {
+          title: "Machine Learning Cohort (Internship)",
+          period: "Feb 2024 – Jun 2024",
+          isPromotion: false,
+          description: [
+            "Completed rigorous training in advanced machine learning, deep learning, computer vision, and NLP curated by Google and industry mentors.",
+            "Developed the DermoAlly Android app's CNN classification model with TensorFlow, handling end-to-end data preprocessing, augmentation, hyperparameter tuning, and TFLite mobile deployment.",
+          ],
+          tags: ["TensorFlow", "Deep Learning", "CNN", "Python", "Google Cloud Platform", "TFLite"],
+        },
       ],
     },
   ]
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  }
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   }
 
   return (
-    <section id="experience" className="py-20 bg-gray-50 dark:bg-gray-800">
-      <div className="container mx-auto px-4">
+    <section id="experience" className="py-24 relative overflow-hidden bg-slate-900/30">
+      <div className="container mx-auto px-4 max-w-5xl">
+        {/* Section Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-16 space-y-3"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeIn}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Work <span className="text-emerald-600">Experience</span>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs text-emerald-400 font-medium">
+            <Briefcase className="h-3.5 w-3.5" />
+            <span>Career Path</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+            Professional <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">Experience</span>
           </h2>
-          <div className="w-20 h-1 bg-emerald-600 mx-auto mb-8"></div>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            My professional journey and experiences that have shaped my skills and expertise in machine learning and
-            data analysis.
+          <p className="text-slate-400 max-w-xl mx-auto text-sm sm:text-base">
+            From machine learning foundations to leading operational intelligence at a nationwide logistics scale.
           </p>
         </motion.div>
 
-        <motion.div
-          className="relative max-w-4xl mx-auto"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
-        >
-          {/* Timeline line */}
-          <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-emerald-200 dark:bg-emerald-900"></div>
-
-          {experiences.map((exp, index) => (
+        {/* Experience Timeline */}
+        <div className="space-y-10">
+          {experiences.map((exp, expIdx) => (
             <motion.div
-              key={index}
-              variants={fadeIn}
-              className={`relative flex flex-col md:flex-row items-center mb-12 ${
-                index % 2 === 0 ? "md:flex-row-reverse" : ""
-              }`}
+              key={expIdx}
+              className="relative rounded-2xl bg-slate-900/80 border border-slate-800 p-6 sm:p-8 backdrop-blur-xl shadow-xl hover:border-slate-700 transition-all duration-300"
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: expIdx * 0.1 }}
             >
-              {/* Timeline dot */}
-              <div className="absolute left-0 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-emerald-600 z-10"></div>
+              {/* Header Info */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-800/80 gap-3">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mt-0.5">
+                    <Building2 className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                      {exp.company}
+                      {exp.isCurrent && (
+                        <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                          Current
+                        </span>
+                      )}
+                    </h3>
+                    <p className="text-xs text-slate-400 font-medium mt-0.5">{exp.companyType}</p>
+                  </div>
+                </div>
 
-              {/* Content */}
-              <div className={`w-full md:w-1/2 ${index % 2 === 0 ? "md:pr-12" : "md:pl-12"}`}>
-                <Card className="h-full hover:shadow-lg transition-shadow">
-                  <CardContent className="p-6">
-                    <Badge className="mb-2 bg-emerald-600 hover:bg-emerald-700">{exp.period}</Badge>
-                    <h3 className="text-xl font-semibold mb-1 text-gray-900 dark:text-white">{exp.title}</h3>
-                    <p className="text-emerald-600 font-medium mb-4">{exp.company}</p>
-                    <ul className="space-y-2">
-                      {exp.description.map((item, i) => (
-                        <li key={i} className="text-gray-600 dark:text-gray-400 flex items-start">
-                          <span className="mr-2 text-emerald-600">•</span>
+                <div className="flex flex-col sm:items-end text-xs text-slate-400">
+                  <span className="font-semibold text-slate-300 flex items-center gap-1.5">
+                    <Calendar className="h-3.5 w-3.5 text-emerald-400" />
+                    {exp.period}
+                  </span>
+                  <span className="flex items-center gap-1 mt-1 text-slate-500">
+                    <MapPin className="h-3 w-3" />
+                    {exp.location}
+                  </span>
+                </div>
+              </div>
+
+              {/* Roles Under Company */}
+              <div className="mt-6 space-y-8">
+                {exp.roles.map((role, roleIdx) => (
+                  <div key={roleIdx} className="relative pl-6 border-l-2 border-emerald-500/40 space-y-3">
+                    {/* Bullet marker */}
+                    <div className="absolute -left-[7px] top-1.5 w-3 h-3 rounded-full bg-emerald-400 ring-4 ring-slate-900" />
+
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <h4 className="text-base sm:text-lg font-bold text-white">
+                          {role.title}
+                        </h4>
+                        {role.isPromotion && (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 text-emerald-300 border border-emerald-500/30 text-[11px] font-semibold">
+                            <TrendingUp className="h-3 w-3" />
+                            Promoted
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-xs text-slate-400 font-medium bg-slate-800/60 px-2.5 py-1 rounded-md">
+                        {role.period}
+                      </span>
+                    </div>
+
+                    {/* Bullet Points */}
+                    <ul className="space-y-2.5 pt-1">
+                      {role.description.map((item, i) => (
+                        <li key={i} className="text-xs sm:text-sm text-slate-300 leading-relaxed flex items-start gap-2.5">
+                          <span className="text-emerald-400 mt-1 flex-shrink-0 text-base leading-none">•</span>
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
-                  </CardContent>
-                </Card>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-1.5 pt-2">
+                      {role.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2.5 py-0.5 rounded-md bg-slate-800/80 border border-slate-700/60 text-[11px] font-medium text-slate-300"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

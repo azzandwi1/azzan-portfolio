@@ -1,195 +1,145 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useState } from "react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { BarChart3, Brain, Database, Truck, Code2, Cpu, Wrench } from "lucide-react"
 
 export default function Skills() {
-  const [activeTab, setActiveTab] = useState("technical")
-
-  const technicalSkills = [
-    "Web Scraping",
-    "Data Annotation",
-    "Data Cleaning & Preprocessing",
-    "Feature Engineering",
-    "Exploratory Data Analysis (EDA)",
-    "Data Visualization & Storytelling",
-    "ML/DL Model Development",
-    "Computer Vision",
-    "Natural Language Processing",
-    "Large Language Models",
-    "Retrieval-Augmented Generation",
-    "Model Evaluation & Deployment",
-  ]
-
-  const softSkills = [
-    "Team Collaboration",
-    "Problem Solving", 
-    "Technical Mentoring",
-    "Critical Thinking",
-    "Communication",
-    "Leadership",
+  const skillPillars = [
+    {
+      title: "Business Intelligence & Analytics",
+      icon: BarChart3,
+      accent: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
+      description: "Enterprise dashboard engineering, star-schema data modeling, and executive KPI visibility.",
+      skills: [
+        "Power BI",
+        "DAX Studio",
+        "Power Query (M Code)",
+        "Advanced Excel (Data Model)",
+        "Looker Studio",
+        "Exploratory Data Analysis (EDA)",
+        "KPI Dashboard Architecture",
+        "Data Storytelling",
+      ],
+    },
+    {
+      title: "Machine Learning & Edge AI",
+      icon: Brain,
+      accent: "text-cyan-400 bg-cyan-500/10 border-cyan-500/20",
+      description: "Applied deep learning, computer vision, and lightweight edge inference for real-world automation.",
+      skills: [
+        "Computer Vision",
+        "MobileNetV3",
+        "TensorFlow / Keras",
+        "TensorFlow Lite (TFLite)",
+        "PyTorch",
+        "Scikit-Learn",
+        "RAG (FAISS & Gemini API)",
+        "Multimodal Late-Fusion",
+      ],
+    },
+    {
+      title: "Data Engineering & Scripting",
+      icon: Database,
+      accent: "text-teal-400 bg-teal-500/10 border-teal-500/20",
+      description: "Building automated data processing workflows, ETL pipelines, and API integrations.",
+      skills: [
+        "Python (Pandas, NumPy)",
+        "SQL (PostgreSQL, BigQuery)",
+        "Google Apps Script",
+        "ETL / Data Cleaning",
+        "FastAPI / REST APIs",
+        "Docker Containerization",
+        "Web Scraping (Playwright)",
+        "Git & GitHub Workflow",
+      ],
+    },
+    {
+      title: "Logistics & Operations Excellence",
+      icon: Truck,
+      accent: "text-indigo-400 bg-indigo-500/10 border-indigo-500/20",
+      description: "Domain expertise in last-mile courier logistics, operational quality governance, and compensation.",
+      skills: [
+        "Last-Mile Logistics Analytics",
+        "NOS & SULTIM KPI Monitoring",
+        "SLA & On-Time Performance (OTP)",
+        "Courier Wage & Incentive Modeling",
+        "UMK 2026 Regional Scaling",
+        "Logistic Difficulty Index (LDI)",
+        "POD Compliance Audits",
+        "Root Cause Analysis (RCA)",
+      ],
+    },
   ]
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  }
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   }
 
   return (
-    <section id="skills" className="py-20">
-      <div className="container mx-auto px-4">
+    <section id="skills" className="py-24 relative overflow-hidden bg-slate-900/30">
+      <div className="container mx-auto px-4 max-w-6xl">
+        {/* Section Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-16 space-y-3"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeIn}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            My <span className="text-emerald-600">Skills</span>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs text-emerald-400 font-medium">
+            <Wrench className="h-3.5 w-3.5" />
+            <span>Technical Capabilities</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+            Specialized Skills & <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">Tech Stack</span>
           </h2>
-          <div className="w-20 h-1 bg-emerald-600 mx-auto mb-8"></div>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            I've developed a diverse set of skills in machine learning, data analysis, and software development.
+          <p className="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base">
+            Structured into four distinct pillars: Analytics, Machine Learning, Data Engineering, and Logistics Domain Expertise.
           </p>
         </motion.div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeIn}
-        >
-          <Tabs defaultValue="technical" className="w-full" onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-2 mb-8">
-              <TabsTrigger value="technical">Technical Skills</TabsTrigger>
-              <TabsTrigger value="soft">Soft Skills</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="technical">
+        {/* 4 Pillars Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {skillPillars.map((pillar, i) => {
+            const Icon = pillar.icon
+            return (
               <motion.div
-                className="grid grid-cols-2 md:grid-cols-3 gap-6"
-                variants={staggerContainer}
-                initial="hidden"
-                animate={activeTab === "technical" ? "visible" : "hidden"}
+                key={pillar.title}
+                className="rounded-2xl bg-slate-900/80 border border-slate-800 p-7 backdrop-blur-xl shadow-xl hover:border-slate-700 hover:shadow-2xl transition-all duration-300 group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
               >
-                {technicalSkills.map((skill, index) => (
-                  <motion.div 
-                    key={index} 
-                    variants={fadeIn} 
-                    className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300"
-                  >
-                    <span className="text-lg font-medium text-gray-900 dark:text-white text-center">
-                      {skill}
-                    </span>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </TabsContent>
-
-            <TabsContent value="soft">
-              <motion.div
-                className="grid grid-cols-2 md:grid-cols-3 gap-6"
-                variants={staggerContainer}
-                initial="hidden"
-                animate={activeTab === "soft" ? "visible" : "hidden"}
-              >
-                {softSkills.map((skill, index) => (
-                  <motion.div 
-                    key={index} 
-                    variants={fadeIn} 
-                    className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300"
-                  >
-                    <span className="text-lg font-medium text-gray-900 dark:text-white text-center">
-                      {skill}
-                    </span>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </TabsContent>
-          </Tabs>
-        </motion.div>
-
-        <motion.div
-          className="mt-16"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeIn}
-        >
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-            🧰 Tools & Technologies
-          </h3>
-          <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-6"
-            variants={staggerContainer}
-          >
-            {[
-              // Languages & DB
-              { name: "Python", icon: "python", useLocal: false },
-              { name: "SQL", icon: "sqlite", useLocal: false },
-              // ML/DL Libraries
-              { name: "scikit-learn", icon: "sklearn", useLocal: false },
-              { name: "PyTorch", icon: "pytorch", useLocal: false },
-              { name: "TensorFlow", icon: "tensorflow", useLocal: false },
-              // Frameworks
-              { name: "FastAPI", icon: "fastapi", useLocal: false },
-              { name: "Flask", icon: "flask", useLocal: false },
-              // BI & Productivity
-              { name: "Power BI", icon: "powerbi", useLocal: true },
-              { name: "Excel", icon: "excel", useLocal: true },
-              { name: "Jupyter Notebook", icon: "jupyter", useLocal: true },
-              { name: "VS Code", icon: "vscode", useLocal: false },
-              // DevOps & Platforms
-              { name: "Docker", icon: "docker", useLocal: false },
-              { name: "Postman", icon: "postman", useLocal: false },
-              { name: "GitHub", icon: "github", useLocal: false },
-              { name: "Hugging Face", icon: "huggingface", useLocal: true },
-              { name: "Roboflow", icon: "roboflow", useLocal: true },
-            ].map((tool, index) => (
-              <motion.div
-                key={index}
-                variants={fadeIn}
-                className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 flex flex-col items-center justify-center hover:shadow-lg transition-shadow duration-300"
-              >
-                <img 
-                  src={tool.useLocal ? `/logo/${tool.icon}.png` : `https://skillicons.dev/icons?i=${tool.icon}`}
-                  alt={tool.name}
-                  className="w-12 h-12 mb-3"
-                  onError={(e) => {
-                    const target = e.currentTarget as HTMLImageElement
-                    target.style.display = 'none'
-                    const nextElement = target.nextElementSibling as HTMLElement
-                    if (nextElement) {
-                      nextElement.style.display = 'block'
-                    }
-                  }}
-                />
-                <div className="text-sm font-medium text-gray-900 dark:text-white text-center" style={{display: 'none'}}>
-                  {tool.name}
+                <div className="flex items-start gap-4 mb-5">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center border group-hover:scale-105 transition-transform ${pillar.accent}`}>
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors">
+                      {pillar.title}
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                      {pillar.description}
+                    </p>
+                  </div>
                 </div>
-                <span className="text-sm font-medium text-gray-900 dark:text-white text-center mt-2">
-                  {tool.name}
-                </span>
+
+                <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-800/80">
+                  {pillar.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="text-xs px-3 py-1.5 rounded-lg bg-slate-800/70 hover:bg-slate-800 text-slate-200 border border-slate-700/60 font-medium transition-colors"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
+            )
+          })}
+        </div>
       </div>
     </section>
   )
