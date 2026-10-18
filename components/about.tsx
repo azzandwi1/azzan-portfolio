@@ -166,16 +166,16 @@ export default function About() {
             </div>
 
             <h3 className="text-xl font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors">
-              Informatics Graduate with Honors (IPK 3.87/4.00) & National Scholar
+              Informatics Graduate with Honors (3.87/4.00 GPA) & National Scholar
             </h3>
             <p className="text-slate-300 text-sm leading-relaxed mb-6">
               Graduated with distinction from <strong className="text-white">Universitas Mercu Buana</strong> with specialized research in 
               Multimodal Deep Learning (Late-Fusion of Text & Vision). Awarded the <strong className="text-white">OSC Medcom.id Full Scholarship</strong> (selected out of 50,000+ national candidates) 
-              and won <strong className="text-white">Juara 2 Nasional</strong> at the Hackathon Komdigi x DQLab 2025.
+              and won <strong className="text-white">2nd Place Nationally</strong> at the Hackathon Komdigi x DQLab 2025.
             </p>
 
             <div className="flex flex-wrap gap-2 pt-2 border-t border-slate-800/80">
-              {["IPK 3.87/4.00", "OSC Medcom Awardee (1 of 50K+)", "Juara 2 Hackathon Komdigi", "Bangkit Academy Graduate"].map((t) => (
+              {["GPA 3.87/4.00", "OSC Medcom Awardee (1 of 50K+)", "2nd Place Hackathon Komdigi", "Bangkit Academy Graduate"].map((t) => (
                 <span key={t} className="text-xs px-2.5 py-1 rounded-lg bg-slate-800/60 text-slate-300 border border-slate-700/50">
                   {t}
                 </span>

@@ -172,7 +172,7 @@ export default function Hero() {
                 </div>
                 <div>
                   <p className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">National Hackathon</p>
-                  <p className="text-xs font-bold text-white">Juara 2 Komdigi x DQLab</p>
+                  <p className="text-xs font-bold text-white">2nd Place: Komdigi x DQLab</p>
                 </div>
               </motion.div>
             </div>
@@ -203,7 +203,7 @@ export default function Hero() {
               sub: "Universitas Mercu Buana",
             },
             {
-              metric: "Juara 2 🥈",
+              metric: "2nd Place 🥈",
               label: "National Data Hackathon",
               sub: "Kemenkomdigi RI x DQLab",
             },
