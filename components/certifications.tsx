@@ -7,20 +7,20 @@ import { Card, CardContent } from "@/components/ui/card"
 export default function Certifications() {
   const honors = [
     {
-      title: "Juara 2 Nasional — Hackathon Komdigi x DQLab 2025",
-      issuer: "Kementerian Komunikasi dan Digital Republik Indonesia & DQLab",
+      title: "2nd Place Winner – National Hackathon Komdigi x DQLab 2025",
+      issuer: "Ministry of Communication and Digital (Komdigi) & DQLab",
       date: "Nov 2025",
       description:
-        "Meraih posisi kedua tingkat nasional dalam kompetisi hackathon data melalui solusi berbasis Data Analytics, Data Engineering, dan Deep Learning.",
+        "Secured 2nd place nationwide in a competitive data innovation hackathon, building an end-to-end predictive analytics and deep learning solution for operational logistics.",
       badge: "National 2nd Winner",
       accent: "from-amber-500/20 via-orange-500/10 to-transparent border-amber-500/30 text-amber-400",
     },
     {
       title: "OSC Medcom.id Full Undergraduate Scholarship Awardee",
-      issuer: "Online Scholarship Competition by Medcom.id",
+      issuer: "Surya Edukasi Bangsa Foundation & Medcom.id",
       date: "Jan 2021",
       description:
-        "Terpilih dari 50.000+ peserta se-Indonesia untuk menerima beasiswa penuh program sarjana S1 Informatika di Universitas Mercu Buana.",
+        "Selected from 50,000+ national applicants to receive a 100% full-ride undergraduate scholarship for Computer Science at Universitas Mercu Buana.",
       badge: "Top 0.1% National Scholar",
       accent: "from-emerald-500/20 via-teal-500/10 to-transparent border-emerald-500/30 text-emerald-400",
     },
@@ -70,7 +70,7 @@ export default function Certifications() {
       year: "Mar 2024",
     },
     {
-      title: "Belajar Analisis Data dengan Python",
+      title: "Data Analysis with Python Certification",
       issuer: "Dicoding Indonesia",
       id: "1RXY1RD41PVM",
       year: "Mar 2024",
